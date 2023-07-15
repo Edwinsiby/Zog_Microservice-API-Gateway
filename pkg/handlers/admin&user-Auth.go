@@ -36,17 +36,31 @@ func (a *AuthenticationHandler) IndexHandler(c *gin.Context) {
 
 }
 
+// UserSignup  godoc
+//
+//	@Summary		signup
+//	@Description	Adding new user to the database
+//	@Tags			User Authentication
+//	@Accept			json
+//	@Produce		json
+//	@Param			userInput	body		models.Signup	true	"User Data"
+//	@Success		200			{object}	entity.User
+//	@Router			/signup [post]
 func (a *AuthenticationHandler) UserSignup(c *gin.Context) {
 	var userInput entity.Signup
 	if err := c.ShouldBindJSON(&userInput); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	if userInput.Email == "" || userInput.Phone == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Retry with valid credentials"})
+		return
+	}
 	var user pb.CreateUserRequest
 	copier.Copy(&user, &userInput)
 	resp, err := a.grpcClient.CreateUser(context.Background(), &user)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	} else {
 		c.JSON(http.StatusCreated, gin.H{"message": resp})
