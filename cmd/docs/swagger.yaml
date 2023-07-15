@@ -1,4 +1,309 @@
+definitions:
+  entity.Admin:
+    properties:
+      active:
+        type: boolean
+      adminname:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      role:
+        type: string
+    type: object
+  entity.AdminDashboard:
+    properties:
+      averageordervalue:
+        type: integer
+      newusers:
+        type: integer
+      pendingorders:
+        type: integer
+      returnorders:
+        type: integer
+      stocklesscategory:
+        type: string
+      totalorders:
+        type: integer
+      totalproducts:
+        type: integer
+      totalquery:
+        type: integer
+      totalrevenue:
+        type: integer
+      totalusers:
+        type: integer
+    type: object
+  entity.Login:
+    properties:
+      password:
+        type: string
+      phone:
+        type: string
+    required:
+    - password
+    - phone
+    type: object
+  entity.Signup:
+    properties:
+      email:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+    type: object
+  entity.User:
+    properties:
+      email:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      phone:
+        type: string
+      wallet:
+        type: integer
+    required:
+    - email
+    - firstname
+    - lastname
+    - phone
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /admin/home:
+    get:
+      consumes:
+      - application/json
+      description: Admin dashbord
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.AdminDashboard'
+      summary: Admin dashbord
+      tags:
+      - User&Admin Authentication
+  /admin/loginpassword:
+    post:
+      consumes:
+      - application/json
+      description: Admin login with password and phone number
+      parameters:
+      - description: Admin Data
+        in: body
+        name: admin
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Login'
+      summary: Admin Login with password
+      tags:
+      - User&Admin Authentication
+  /admin/registeradmin:
+    post:
+      consumes:
+      - application/json
+      description: Adding new admin to the database
+      parameters:
+      - description: Admin Data
+        in: body
+        name: admin
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Admin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Admin'
+      summary: registering new admin
+      tags:
+      - User&Admin Authentication
+  /logout:
+    post:
+      consumes:
+      - application/json
+      description: Deleting cookie from the browser while logout
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            type: string
+      summary: logout
+      tags:
+      - User Authentication
+  /user/loginwithotp:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Login for user with otp
+      parameters:
+      - description: Phone No
+        in: formData
+        name: phone
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Login'
+      summary: Login
+      tags:
+      - User&Admin Authentication
+  /user/loginwithpassword:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Login for user with password
+      parameters:
+      - description: Phone No
+        in: formData
+        name: phone
+        required: true
+        type: string
+      - description: Password
+        in: formData
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Login'
+      summary: Login
+      tags:
+      - User&Admin Authentication
+  /user/otpvalidation:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Validating user otp for login validation
+      parameters:
+      - description: Otp
+        in: formData
+        name: otp
+        required: true
+        type: string
+      - description: Key
+        in: formData
+        name: key
+        required: true
+        type: string
+      - description: phone
+        in: formData
+        name: phone
+        type: string
+      - description: resend
+        in: formData
+        name: resend
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Login'
+      summary: Otp Validation
+      tags:
+      - User&Admin Authentication
+  /user/signup:
+    post:
+      consumes:
+      - application/json
+      description: Adding new user to the database
+      parameters:
+      - description: User Data
+        in: body
+        name: userInput
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Signup'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Signup'
+      summary: signup
+      tags:
+      - User&Admin Authentication
+  /user/signupotpvalidation:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Validating user otp for signup
+      parameters:
+      - description: Twilio Key
+        in: formData
+        name: key
+        required: true
+        type: string
+      - description: Otp
+        in: formData
+        name: otp
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            type: string
+      summary: Sign Up Otp Validation
+      tags:
+      - User&Admin Authentication
+  /user/signupwithotp:
+    post:
+      consumes:
+      - application/json
+      description: Adding new user to the database
+      parameters:
+      - description: User Data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Signup'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.User'
+      summary: signup with opt validation
+      tags:
+      - User&Admin Authentication
 swagger: "2.0"

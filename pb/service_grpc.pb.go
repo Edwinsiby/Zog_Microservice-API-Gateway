@@ -24,6 +24,13 @@ const _ = grpc.SupportPackageIsVersion7
 type MyServiceClient interface {
 	MyMethod(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
+	CreateUserWithOtp(ctx context.Context, in *CreateUserWithOtpRequest, opts ...grpc.CallOption) (*CreateUserWithOtpResponse, error)
+	SignupOtpValidation(ctx context.Context, in *OtpValidationRequest, opts ...grpc.CallOption) (*OtpValidationResponse, error)
+	LoginWithOtp(ctx context.Context, in *LoginWithOtpRequest, opts ...grpc.CallOption) (*LoginWithOtpResponse, error)
+	LoginOtpValidation(ctx context.Context, in *OtpValidationRequest, opts ...grpc.CallOption) (*LoginOtpValidationResponse, error)
+	LoginWithPassword(ctx context.Context, in *LoginWithPasswordRequest, opts ...grpc.CallOption) (*LoginWithPasswordResponse, error)
+	RegisterAdmin(ctx context.Context, in *RegisterAdminRequest, opts ...grpc.CallOption) (*RegisterAdminResponse, error)
+	AdminLoginWithPassword(ctx context.Context, in *LoginWithPasswordRequest, opts ...grpc.CallOption) (*LoginWithPasswordResponse, error)
 }
 
 type myServiceClient struct {
@@ -52,12 +59,82 @@ func (c *myServiceClient) CreateUser(ctx context.Context, in *CreateUserRequest,
 	return out, nil
 }
 
+func (c *myServiceClient) CreateUserWithOtp(ctx context.Context, in *CreateUserWithOtpRequest, opts ...grpc.CallOption) (*CreateUserWithOtpResponse, error) {
+	out := new(CreateUserWithOtpResponse)
+	err := c.cc.Invoke(ctx, "/pb.MyService/CreateUserWithOtp", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myServiceClient) SignupOtpValidation(ctx context.Context, in *OtpValidationRequest, opts ...grpc.CallOption) (*OtpValidationResponse, error) {
+	out := new(OtpValidationResponse)
+	err := c.cc.Invoke(ctx, "/pb.MyService/SignupOtpValidation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myServiceClient) LoginWithOtp(ctx context.Context, in *LoginWithOtpRequest, opts ...grpc.CallOption) (*LoginWithOtpResponse, error) {
+	out := new(LoginWithOtpResponse)
+	err := c.cc.Invoke(ctx, "/pb.MyService/LoginWithOtp", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myServiceClient) LoginOtpValidation(ctx context.Context, in *OtpValidationRequest, opts ...grpc.CallOption) (*LoginOtpValidationResponse, error) {
+	out := new(LoginOtpValidationResponse)
+	err := c.cc.Invoke(ctx, "/pb.MyService/LoginOtpValidation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myServiceClient) LoginWithPassword(ctx context.Context, in *LoginWithPasswordRequest, opts ...grpc.CallOption) (*LoginWithPasswordResponse, error) {
+	out := new(LoginWithPasswordResponse)
+	err := c.cc.Invoke(ctx, "/pb.MyService/LoginWithPassword", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myServiceClient) RegisterAdmin(ctx context.Context, in *RegisterAdminRequest, opts ...grpc.CallOption) (*RegisterAdminResponse, error) {
+	out := new(RegisterAdminResponse)
+	err := c.cc.Invoke(ctx, "/pb.MyService/RegisterAdmin", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myServiceClient) AdminLoginWithPassword(ctx context.Context, in *LoginWithPasswordRequest, opts ...grpc.CallOption) (*LoginWithPasswordResponse, error) {
+	out := new(LoginWithPasswordResponse)
+	err := c.cc.Invoke(ctx, "/pb.MyService/AdminLoginWithPassword", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MyServiceServer is the server API for MyService service.
 // All implementations must embed UnimplementedMyServiceServer
 // for forward compatibility
 type MyServiceServer interface {
 	MyMethod(context.Context, *Request) (*Response, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
+	CreateUserWithOtp(context.Context, *CreateUserWithOtpRequest) (*CreateUserWithOtpResponse, error)
+	SignupOtpValidation(context.Context, *OtpValidationRequest) (*OtpValidationResponse, error)
+	LoginWithOtp(context.Context, *LoginWithOtpRequest) (*LoginWithOtpResponse, error)
+	LoginOtpValidation(context.Context, *OtpValidationRequest) (*LoginOtpValidationResponse, error)
+	LoginWithPassword(context.Context, *LoginWithPasswordRequest) (*LoginWithPasswordResponse, error)
+	RegisterAdmin(context.Context, *RegisterAdminRequest) (*RegisterAdminResponse, error)
+	AdminLoginWithPassword(context.Context, *LoginWithPasswordRequest) (*LoginWithPasswordResponse, error)
 	mustEmbedUnimplementedMyServiceServer()
 }
 
@@ -70,6 +147,27 @@ func (UnimplementedMyServiceServer) MyMethod(context.Context, *Request) (*Respon
 }
 func (UnimplementedMyServiceServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
+}
+func (UnimplementedMyServiceServer) CreateUserWithOtp(context.Context, *CreateUserWithOtpRequest) (*CreateUserWithOtpResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUserWithOtp not implemented")
+}
+func (UnimplementedMyServiceServer) SignupOtpValidation(context.Context, *OtpValidationRequest) (*OtpValidationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SignupOtpValidation not implemented")
+}
+func (UnimplementedMyServiceServer) LoginWithOtp(context.Context, *LoginWithOtpRequest) (*LoginWithOtpResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LoginWithOtp not implemented")
+}
+func (UnimplementedMyServiceServer) LoginOtpValidation(context.Context, *OtpValidationRequest) (*LoginOtpValidationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LoginOtpValidation not implemented")
+}
+func (UnimplementedMyServiceServer) LoginWithPassword(context.Context, *LoginWithPasswordRequest) (*LoginWithPasswordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LoginWithPassword not implemented")
+}
+func (UnimplementedMyServiceServer) RegisterAdmin(context.Context, *RegisterAdminRequest) (*RegisterAdminResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterAdmin not implemented")
+}
+func (UnimplementedMyServiceServer) AdminLoginWithPassword(context.Context, *LoginWithPasswordRequest) (*LoginWithPasswordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AdminLoginWithPassword not implemented")
 }
 func (UnimplementedMyServiceServer) mustEmbedUnimplementedMyServiceServer() {}
 
@@ -120,6 +218,132 @@ func _MyService_CreateUser_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MyService_CreateUserWithOtp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserWithOtpRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MyServiceServer).CreateUserWithOtp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.MyService/CreateUserWithOtp",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MyServiceServer).CreateUserWithOtp(ctx, req.(*CreateUserWithOtpRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MyService_SignupOtpValidation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OtpValidationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MyServiceServer).SignupOtpValidation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.MyService/SignupOtpValidation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MyServiceServer).SignupOtpValidation(ctx, req.(*OtpValidationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MyService_LoginWithOtp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginWithOtpRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MyServiceServer).LoginWithOtp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.MyService/LoginWithOtp",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MyServiceServer).LoginWithOtp(ctx, req.(*LoginWithOtpRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MyService_LoginOtpValidation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OtpValidationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MyServiceServer).LoginOtpValidation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.MyService/LoginOtpValidation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MyServiceServer).LoginOtpValidation(ctx, req.(*OtpValidationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MyService_LoginWithPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginWithPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MyServiceServer).LoginWithPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.MyService/LoginWithPassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MyServiceServer).LoginWithPassword(ctx, req.(*LoginWithPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MyService_RegisterAdmin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterAdminRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MyServiceServer).RegisterAdmin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.MyService/RegisterAdmin",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MyServiceServer).RegisterAdmin(ctx, req.(*RegisterAdminRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MyService_AdminLoginWithPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginWithPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MyServiceServer).AdminLoginWithPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.MyService/AdminLoginWithPassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MyServiceServer).AdminLoginWithPassword(ctx, req.(*LoginWithPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MyService_ServiceDesc is the grpc.ServiceDesc for MyService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -134,6 +358,34 @@ var MyService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateUser",
 			Handler:    _MyService_CreateUser_Handler,
+		},
+		{
+			MethodName: "CreateUserWithOtp",
+			Handler:    _MyService_CreateUserWithOtp_Handler,
+		},
+		{
+			MethodName: "SignupOtpValidation",
+			Handler:    _MyService_SignupOtpValidation_Handler,
+		},
+		{
+			MethodName: "LoginWithOtp",
+			Handler:    _MyService_LoginWithOtp_Handler,
+		},
+		{
+			MethodName: "LoginOtpValidation",
+			Handler:    _MyService_LoginOtpValidation_Handler,
+		},
+		{
+			MethodName: "LoginWithPassword",
+			Handler:    _MyService_LoginWithPassword_Handler,
+		},
+		{
+			MethodName: "RegisterAdmin",
+			Handler:    _MyService_RegisterAdmin_Handler,
+		},
+		{
+			MethodName: "AdminLoginWithPassword",
+			Handler:    _MyService_AdminLoginWithPassword_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

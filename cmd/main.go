@@ -12,6 +12,7 @@ import (
 )
 
 func main() {
+
 	docs.SwaggerInfo.Title = "Zog_festiv"
 	docs.SwaggerInfo.Description = "Yo Yo Yo 148 3 to the 3 to the 6 to the 9 "
 	docs.SwaggerInfo.Version = "1.0"

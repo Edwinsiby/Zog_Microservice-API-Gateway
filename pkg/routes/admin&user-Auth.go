@@ -18,7 +18,7 @@ func AuthenticationRoutes(r *gin.Engine, handlers *handlers.AuthenticationHandle
 
 	r.POST("/admin/registeradmin", m.AdminRetriveCookie, handlers.RegisterAdmin)
 	r.POST("/admin/loginpassword", handlers.AdminLoginWithPassword)
-	r.POST("/admin/otplogin", handlers.AdminOtpLogin)
 	r.POST("/admin/otpvalidation", handlers.LoginOtpValidation)
 	r.GET("/admin/home", m.AdminRetriveCookie, handlers.AdminDashboard)
+	r.POST("/logout", handlers.Logout)
 }
