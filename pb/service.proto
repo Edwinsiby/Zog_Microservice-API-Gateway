@@ -32,7 +32,6 @@ service AdminDashboard{
 }
 
 
-
 message Request {
   string data = 1;
 }
