@@ -121,14 +121,18 @@ message UserListRequest{
   int32 limit = 2;
 }
 
-message UserListResponse{
-  int32 id   = 1;
-  string firstname  = 2;
-  string lastname   = 3;
-  string email      = 4;
-  string phone      = 5;
-  string wallet     = 6;
-  string permission = 7;
+message UserListResponse {
+  repeated User users = 1;
+}
+
+message User {
+  int32 id = 1;
+  string firstname = 2;
+  string lastname = 3;
+  string email = 4;
+  string phone = 5;
+  int32 wallet = 6;
+  bool permission = 7;
 }
 
 message SortUserRequest{
@@ -138,13 +142,7 @@ message SortUserRequest{
 }
 
 message SortUserResponse{
-int32 id   = 1;
-  string firstname  = 2;
-  string lastname   = 3;
-  string email      = 4;
-  string phone      = 5;
-  string wallet     = 6;
-  string permission = 7;
+ repeated User users = 1;
 }
 
 message SearchUserBynameRequest{
@@ -152,13 +150,7 @@ message SearchUserBynameRequest{
 }
 
 message SearchUserBynameResponse{
-  int32 id   = 1;
-  string firstname  = 2;
-  string lastname   = 3;
-  string email      = 4;
-  string phone      = 5;
-  string wallet     = 6;
-  string permission = 7;
+  repeated User users = 1;
 }
 
 message SearchUserByidRequest{
@@ -166,13 +158,7 @@ message SearchUserByidRequest{
 }
 
 message SearchUserByidResponse{
-  int32 id   = 1;
-  string firstname  = 2;
-  string lastname   = 3;
-  string email      = 4;
-  string phone      = 5;
-  string wallet     = 6;
-  string permission = 7;
+  repeated User users = 1;
 }
 
 message TogglePermissionRequest{
@@ -189,6 +175,7 @@ message CreateApparelRequest{
   string image = 3;
   string category = 4;
   string subcategory = 5;
+  int32  adminid     = 6;
 }
 
 message CreateApparelResponse{
@@ -202,6 +189,7 @@ message EditApparelResquest{
   string category = 4;
   string subcategory = 5;
   int32  id    = 6;
+  int32  adminid     = 7;
 }
 
 message EditApparelResponse{

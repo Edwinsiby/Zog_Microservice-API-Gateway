@@ -37,6 +37,65 @@ definitions:
       totalusers:
         type: integer
     type: object
+  entity.Apparel:
+    properties:
+      category:
+        type: string
+      id:
+        type: integer
+      imageurl:
+        type: string
+      name:
+        type: string
+      price:
+        type: integer
+      subcategory:
+        type: string
+    type: object
+  entity.ApparelInput:
+    properties:
+      apparelid:
+        type: integer
+      category:
+        type: string
+      color:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      imageurl:
+        type: string
+      name:
+        type: string
+      price:
+        type: integer
+      productCategory:
+        type: string
+      productId:
+        type: integer
+      quantity:
+        type: integer
+      size:
+        type: string
+      subcategory:
+        type: string
+    type: object
+  entity.Coupon:
+    properties:
+      amount:
+        type: integer
+      category:
+        type: string
+      code:
+        type: string
+      type:
+        type: string
+      usage_limit:
+        type: integer
+      valid_until:
+        type: string
+    type: object
   entity.Login:
     properties:
       password:
@@ -46,6 +105,23 @@ definitions:
     required:
     - password
     - phone
+    type: object
+  entity.Offer:
+    properties:
+      amount:
+        type: integer
+      category:
+        type: string
+      minprice:
+        type: integer
+      name:
+        type: string
+      type:
+        type: string
+      usage_limit:
+        type: integer
+      valid_until:
+        type: string
     type: object
   entity.Signup:
     properties:
@@ -81,6 +157,111 @@ definitions:
 info:
   contact: {}
 paths:
+  /admin/addapparel:
+    post:
+      consumes:
+      - application/json
+      description: Adding new product of category apparel in database
+      parameters:
+      - description: Apparel Data
+        in: body
+        name: admin
+        required: true
+        schema:
+          $ref: '#/definitions/entity.ApparelInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Apparel'
+      summary: Adding new product
+      tags:
+      - Admin Dashboard
+  /admin/addcoupon:
+    post:
+      consumes:
+      - application/json
+      description: Addig coupon for users, with a unique code
+      parameters:
+      - description: coupon
+        in: body
+        name: admin
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Coupon'
+      responses:
+        "200":
+          description: Success masage
+          schema:
+            type: string
+      summary: Adding coupon by admin
+      tags:
+      - Admin Dashboard
+  /admin/addoffer:
+    post:
+      consumes:
+      - application/json
+      description: Addig coupon for users, with a unique code
+      parameters:
+      - description: offer
+        in: body
+        name: admin
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Offer'
+      responses:
+        "200":
+          description: Success masage
+          schema:
+            type: string
+      summary: Adding offer by admin
+      tags:
+      - Admin Dashboard
+  /admin/deleteapparel/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Soft deleting the data of a product from database in category apparel
+      parameters:
+      - description: product id
+        in: query
+        name: ProductId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Apparel'
+      summary: Delete existing product from database
+      tags:
+      - Admin Dashboard
+  /admin/editapparel/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Edit data of a product in category apparel
+      parameters:
+      - description: Apparel Data
+        in: body
+        name: admin
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Apparel'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Apparel'
+      summary: Edit existing product data
+      tags:
+      - Admin Dashboard
   /admin/home:
     get:
       consumes:
@@ -140,6 +321,104 @@ paths:
       summary: registering new admin
       tags:
       - User&Admin Authentication
+  /admin/searchuser:
+    get:
+      consumes:
+      - application/json
+      description: Showing user list for management by searching with name or id
+      parameters:
+      - description: User Name
+        in: query
+        name: name
+        type: string
+      - description: User Id
+        in: query
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.User'
+      summary: Search user by id or name
+      tags:
+      - Admin Dashboard
+  /admin/sortuser:
+    get:
+      consumes:
+      - application/json
+      description: Showing user list for management by sorting with permisiion
+      parameters:
+      - description: page no
+        in: query
+        name: page
+        type: string
+      - description: limit no
+        in: query
+        name: limit
+        type: string
+      - description: true/false
+        in: query
+        name: permission
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.User'
+      summary: User list by permission
+      tags:
+      - Admin Dashboard
+  /admin/usermanagement:
+    get:
+      consumes:
+      - application/json
+      description: Showing user list for management by admin
+      parameters:
+      - description: page no
+        in: query
+        name: page
+        type: string
+      - description: limit no
+        in: query
+        name: limit
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.User'
+      summary: User list
+      tags:
+      - Admin Dashboard
+  /admin/userpermission/{id}:
+    post:
+      consumes:
+      - application/json
+      description: Toggling user permission for block/unblock
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Admin'
+      summary: block/unblock user
+      tags:
+      - Admin Dashboard
   /logout:
     post:
       consumes:
