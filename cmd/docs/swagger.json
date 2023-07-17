@@ -476,6 +476,29 @@
                 }
             }
         },
+        "/service3/healthcheck": {
+            "get": {
+                "description": "Service Health Check",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Dashboard"
+                ],
+                "summary": "user dashboard service health check",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user/loginwithotp": {
             "post": {
                 "description": "Login for user with otp",

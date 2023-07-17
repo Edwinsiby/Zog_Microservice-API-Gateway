@@ -31,6 +31,26 @@ service AdminDashboard{
   rpc AddOffer(AddOfferRequest)returns(AddOfferResponse){}
 }
 
+service UserDashboard{
+  rpc MyMethod(Request) returns (Response);
+  rpc Home(HomeRequest) returns (HomeResponse){}
+  rpc AddAddress(AddAddressRequest) returns(AddAddressResponse){}
+  rpc UserDetails(UserDetailsRequset) returns(UserDetailsResponse){}
+  rpc Apparels(ApparelsRequest) returns(ApparelsResponse){}
+  rpc ApparelDetails(ApparelDetailsRequest)returns(ApparelDetailsResponse){}
+  rpc SearchApparels(SearchApparelsRequest)returns(SearchApparelsResponse){}
+  rpc AddToCart(AddToCartRequest)returns(AddToCartResponse){}
+  rpc AddToWishList(AddToWishListRequest)returns(AddToWishListResponse){}
+  rpc Cart(CartRequest)returns(CartResponse){}
+  rpc CartList(CartListRequest)returns(CartListResponse){}
+  rpc RemoveFromCart(RemoveFromCartRequest)returns(RemoveFromCartResponse){}
+  rpc RemoveFromWishlist(RemoveFromWishlistRequest)returns(RemoveFromWishlistResponse){}
+  rpc Wishlist(WishlistRequest)returns(WishlistResponse){}
+  rpc AvailableCoupons(AvailableCouponsRequest)returns(AvailableCouponsResponse){}
+  rpc ApplyCoupon(ApplyCouponRequest)returns(ApplyCouponResponse){}
+  rpc OfferCheck(OfferCheckRequest)returns(OfferCheckResponse){}
+}
+
 
 message Request {
   string data = 1;
@@ -120,6 +140,13 @@ message UserListRequest{
   int32 page  = 1;
   int32 limit = 2;
 }
+
+
+
+
+
+
+
 
 message UserListResponse {
   repeated User users = 1;
@@ -227,4 +254,172 @@ message AddOfferRequest{
 
 message AddOfferResponse{
 string result = 1;
+}
+
+
+
+
+
+
+message HomeRequest{}
+
+message HomeResponse{}
+
+message AddAddressRequest{
+  string house   = 1;
+  string city    = 2;
+  string street  = 3;
+  int32 pincode = 4;
+  string type    = 5; 
+}
+
+message AddAddressResponse{
+  string result = 1;
+}
+
+message UserDetailsRequset{
+  int32 userid = 1;
+}
+
+message Address{
+  string house   = 1;
+  string city    = 2;
+  string street  = 3;
+  string pincode = 4;
+  string type    = 5; 
+}
+
+message UserDetailsResponse{
+  User user = 1;
+  Address address = 2;
+}
+
+message ApparelsRequest{
+  int32 page  = 1;
+  int32 limit = 2;
+  string category =3;
+}
+
+message Apparel{
+  string name  = 1;
+  int32  price = 2;
+  string image = 3;
+  string category = 4;
+  string subcategory = 5;
+  int32 id = 6;
+}
+
+message ApparelsResponse{
+  repeated Apparel apparels = 1; 
+}
+
+message ApparelDetailsRequest{
+  int32 id = 1;
+}
+
+message ApparelDetailsResponse{
+  Apparel apparel = 1;
+}
+
+message SearchApparelsRequest{
+  int32 page = 1;
+  int32 limit = 2;
+  string search = 3;
+}
+
+message SearchApparelsResponse{
+ repeated Apparel apparels = 1;
+}
+
+message AddToCartRequest{
+  int32 productid = 1;
+  int32 quantity  = 2;
+  int32 userid    = 3;
+}
+
+message AddToCartResponse{
+  string result = 1;
+}
+
+message AddToWishListRequest{
+  int32 productid = 1;
+  int32 userid    = 2;
+}
+
+message AddToWishListResponse{
+  string result = 1;
+}
+
+message CartRequest{
+  int32 userid = 1;
+}
+
+message CartResponse{
+  int32 userid = 1;
+  int32 quantity = 2;
+  int32 totalprice = 3;
+  int32 offerprice = 4; 
+}
+
+message CartListRequest{
+  int32 userid = 1;
+}
+
+message CartListResponse{
+  repeated Apparel appaers = 1;
+}
+
+message RemoveFromCartRequest{
+  int32 userid = 1;
+  int32 productid = 2;
+}
+
+message RemoveFromCartResponse{
+  string result = 1;
+}
+
+message RemoveFromWishlistRequest{
+  int32 userid = 1;
+}
+
+message RemoveFromWishlistResponse{
+  string result = 1;
+}
+
+message WishlistRequest{
+  int32 userid = 1;
+}
+
+message WishlistResponse{
+  repeated Apparel appares = 1;
+}
+
+message AvailableCouponsRequest{}
+
+message Coupon{
+   string code = 1;
+   string type = 2;
+   int32 amount = 3;
+   string category = 4; 
+}
+
+message AvailableCouponsResponse{
+  repeated Coupon coupons = 1;
+}
+
+message ApplyCouponRequest{
+  int32 userid = 1;
+  string code = 2;
+}
+
+message ApplyCouponResponse{
+  string result = 1;
+}
+
+message OfferCheckRequest{
+  int32 userid = 1;
+}
+
+message OfferCheckResponse{
+  repeated Coupon offers = 1 ;
 }

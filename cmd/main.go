@@ -34,6 +34,10 @@ func initializeAdminDashboardHandler(cc *grpc.ClientConn) (*handlers.AdminDashbo
 	return handlers.NewAdminDashboardHandler(cc), nil
 }
 
+func initializeUserDashboardHandler(cc *grpc.ClientConn) (*handlers.UserDashboardHandler, error) {
+	return handlers.NewUserDashboardHandler(cc), nil
+}
+
 func InitializeApp() (*gin.Engine, error) {
 	r := gin.Default()
 
@@ -61,5 +65,16 @@ func InitializeApp() (*gin.Engine, error) {
 	}
 	routes.AdminDashboardRoutes(r, adminDashboardHandler)
 
+	// Service3
+	userDashboardConn, err := grpc.Dial("localhost:5052", grpc.WithInsecure())
+	if err != nil {
+		return nil, err
+	}
+
+	userDashboardHandler, err := initializeUserDashboardHandler(userDashboardConn)
+	if err != nil {
+		return nil, err
+	}
+	routes.UserDashboardRoutes(r, userDashboardHandler)
 	return r, nil
 }

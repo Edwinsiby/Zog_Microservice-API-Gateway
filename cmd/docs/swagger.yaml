@@ -464,6 +464,21 @@ paths:
       summary: admin dashboard service health check
       tags:
       - Admin Dashboard
+  /service3/healthcheck:
+    get:
+      consumes:
+      - application/json
+      description: Service Health Check
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: user dashboard service health check
+      tags:
+      - User Dashboard
   /user/loginwithotp:
     post:
       consumes:
