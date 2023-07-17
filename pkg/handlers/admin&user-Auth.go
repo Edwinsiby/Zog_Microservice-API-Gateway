@@ -24,6 +24,15 @@ func NewAuthenticationHandler(cc *grpc.ClientConn) *AuthenticationHandler {
 	}
 }
 
+// ServiceHealthCheck  godoc
+//
+//	@Summary		admin&user Authentication service health check
+//	@Description	Service Health Check
+//	@Tags			User&Admin Authentication
+//	@Accept			json
+//	@Produce		json
+//	@Success		200			string	message
+//	@Router			/service1/healthcheck [get]
 func (a *AuthenticationHandler) IndexHandler(c *gin.Context) {
 	req := &pb.Request{
 		Data: "Mydata",
@@ -300,7 +309,7 @@ func (a *AuthenticationHandler) AdminDashboard(c *gin.Context) {
 //
 //	@Summary		logout
 //	@Description	Deleting cookie from the browser while logout
-//	@Tags			User Authentication
+//	@Tags			User&Admin Authentication
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{string}	string	"Success message"

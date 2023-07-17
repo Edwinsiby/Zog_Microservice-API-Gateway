@@ -391,3 +391,449 @@ var MyService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "service.proto",
 }
+
+// AdminDashboardClient is the client API for AdminDashboard service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AdminDashboardClient interface {
+	MyMethod(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	UserList(ctx context.Context, in *UserListRequest, opts ...grpc.CallOption) (*UserListResponse, error)
+	SortUserByPermission(ctx context.Context, in *SortUserRequest, opts ...grpc.CallOption) (*SortUserResponse, error)
+	SearchUserByname(ctx context.Context, in *SearchUserBynameRequest, opts ...grpc.CallOption) (*SearchUserBynameResponse, error)
+	SearchUserByid(ctx context.Context, in *SearchUserByidRequest, opts ...grpc.CallOption) (*SearchUserByidResponse, error)
+	TogglePermission(ctx context.Context, in *TogglePermissionRequest, opts ...grpc.CallOption) (*TogglePermissionResponse, error)
+	CreateApparel(ctx context.Context, in *CreateApparelRequest, opts ...grpc.CallOption) (*CreateApparelResponse, error)
+	EditApparel(ctx context.Context, in *EditApparelResquest, opts ...grpc.CallOption) (*EditApparelResponse, error)
+	DeleteApparel(ctx context.Context, in *DeleteApparelRequest, opts ...grpc.CallOption) (*DeleteApparelResponse, error)
+	AddCoupon(ctx context.Context, in *AddCouponRequest, opts ...grpc.CallOption) (*AddCouponResponse, error)
+	AddOffer(ctx context.Context, in *AddOfferRequest, opts ...grpc.CallOption) (*AddOfferResponse, error)
+}
+
+type adminDashboardClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAdminDashboardClient(cc grpc.ClientConnInterface) AdminDashboardClient {
+	return &adminDashboardClient{cc}
+}
+
+func (c *adminDashboardClient) MyMethod(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/pb.AdminDashboard/MyMethod", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminDashboardClient) UserList(ctx context.Context, in *UserListRequest, opts ...grpc.CallOption) (*UserListResponse, error) {
+	out := new(UserListResponse)
+	err := c.cc.Invoke(ctx, "/pb.AdminDashboard/UserList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminDashboardClient) SortUserByPermission(ctx context.Context, in *SortUserRequest, opts ...grpc.CallOption) (*SortUserResponse, error) {
+	out := new(SortUserResponse)
+	err := c.cc.Invoke(ctx, "/pb.AdminDashboard/SortUserByPermission", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminDashboardClient) SearchUserByname(ctx context.Context, in *SearchUserBynameRequest, opts ...grpc.CallOption) (*SearchUserBynameResponse, error) {
+	out := new(SearchUserBynameResponse)
+	err := c.cc.Invoke(ctx, "/pb.AdminDashboard/SearchUserByname", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminDashboardClient) SearchUserByid(ctx context.Context, in *SearchUserByidRequest, opts ...grpc.CallOption) (*SearchUserByidResponse, error) {
+	out := new(SearchUserByidResponse)
+	err := c.cc.Invoke(ctx, "/pb.AdminDashboard/SearchUserByid", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminDashboardClient) TogglePermission(ctx context.Context, in *TogglePermissionRequest, opts ...grpc.CallOption) (*TogglePermissionResponse, error) {
+	out := new(TogglePermissionResponse)
+	err := c.cc.Invoke(ctx, "/pb.AdminDashboard/TogglePermission", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminDashboardClient) CreateApparel(ctx context.Context, in *CreateApparelRequest, opts ...grpc.CallOption) (*CreateApparelResponse, error) {
+	out := new(CreateApparelResponse)
+	err := c.cc.Invoke(ctx, "/pb.AdminDashboard/CreateApparel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminDashboardClient) EditApparel(ctx context.Context, in *EditApparelResquest, opts ...grpc.CallOption) (*EditApparelResponse, error) {
+	out := new(EditApparelResponse)
+	err := c.cc.Invoke(ctx, "/pb.AdminDashboard/EditApparel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminDashboardClient) DeleteApparel(ctx context.Context, in *DeleteApparelRequest, opts ...grpc.CallOption) (*DeleteApparelResponse, error) {
+	out := new(DeleteApparelResponse)
+	err := c.cc.Invoke(ctx, "/pb.AdminDashboard/DeleteApparel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminDashboardClient) AddCoupon(ctx context.Context, in *AddCouponRequest, opts ...grpc.CallOption) (*AddCouponResponse, error) {
+	out := new(AddCouponResponse)
+	err := c.cc.Invoke(ctx, "/pb.AdminDashboard/AddCoupon", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminDashboardClient) AddOffer(ctx context.Context, in *AddOfferRequest, opts ...grpc.CallOption) (*AddOfferResponse, error) {
+	out := new(AddOfferResponse)
+	err := c.cc.Invoke(ctx, "/pb.AdminDashboard/AddOffer", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AdminDashboardServer is the server API for AdminDashboard service.
+// All implementations must embed UnimplementedAdminDashboardServer
+// for forward compatibility
+type AdminDashboardServer interface {
+	MyMethod(context.Context, *Request) (*Response, error)
+	UserList(context.Context, *UserListRequest) (*UserListResponse, error)
+	SortUserByPermission(context.Context, *SortUserRequest) (*SortUserResponse, error)
+	SearchUserByname(context.Context, *SearchUserBynameRequest) (*SearchUserBynameResponse, error)
+	SearchUserByid(context.Context, *SearchUserByidRequest) (*SearchUserByidResponse, error)
+	TogglePermission(context.Context, *TogglePermissionRequest) (*TogglePermissionResponse, error)
+	CreateApparel(context.Context, *CreateApparelRequest) (*CreateApparelResponse, error)
+	EditApparel(context.Context, *EditApparelResquest) (*EditApparelResponse, error)
+	DeleteApparel(context.Context, *DeleteApparelRequest) (*DeleteApparelResponse, error)
+	AddCoupon(context.Context, *AddCouponRequest) (*AddCouponResponse, error)
+	AddOffer(context.Context, *AddOfferRequest) (*AddOfferResponse, error)
+	mustEmbedUnimplementedAdminDashboardServer()
+}
+
+// UnimplementedAdminDashboardServer must be embedded to have forward compatible implementations.
+type UnimplementedAdminDashboardServer struct {
+}
+
+func (UnimplementedAdminDashboardServer) MyMethod(context.Context, *Request) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MyMethod not implemented")
+}
+func (UnimplementedAdminDashboardServer) UserList(context.Context, *UserListRequest) (*UserListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserList not implemented")
+}
+func (UnimplementedAdminDashboardServer) SortUserByPermission(context.Context, *SortUserRequest) (*SortUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SortUserByPermission not implemented")
+}
+func (UnimplementedAdminDashboardServer) SearchUserByname(context.Context, *SearchUserBynameRequest) (*SearchUserBynameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchUserByname not implemented")
+}
+func (UnimplementedAdminDashboardServer) SearchUserByid(context.Context, *SearchUserByidRequest) (*SearchUserByidResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchUserByid not implemented")
+}
+func (UnimplementedAdminDashboardServer) TogglePermission(context.Context, *TogglePermissionRequest) (*TogglePermissionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TogglePermission not implemented")
+}
+func (UnimplementedAdminDashboardServer) CreateApparel(context.Context, *CreateApparelRequest) (*CreateApparelResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateApparel not implemented")
+}
+func (UnimplementedAdminDashboardServer) EditApparel(context.Context, *EditApparelResquest) (*EditApparelResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EditApparel not implemented")
+}
+func (UnimplementedAdminDashboardServer) DeleteApparel(context.Context, *DeleteApparelRequest) (*DeleteApparelResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteApparel not implemented")
+}
+func (UnimplementedAdminDashboardServer) AddCoupon(context.Context, *AddCouponRequest) (*AddCouponResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddCoupon not implemented")
+}
+func (UnimplementedAdminDashboardServer) AddOffer(context.Context, *AddOfferRequest) (*AddOfferResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOffer not implemented")
+}
+func (UnimplementedAdminDashboardServer) mustEmbedUnimplementedAdminDashboardServer() {}
+
+// UnsafeAdminDashboardServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AdminDashboardServer will
+// result in compilation errors.
+type UnsafeAdminDashboardServer interface {
+	mustEmbedUnimplementedAdminDashboardServer()
+}
+
+func RegisterAdminDashboardServer(s grpc.ServiceRegistrar, srv AdminDashboardServer) {
+	s.RegisterService(&AdminDashboard_ServiceDesc, srv)
+}
+
+func _AdminDashboard_MyMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminDashboardServer).MyMethod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AdminDashboard/MyMethod",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminDashboardServer).MyMethod(ctx, req.(*Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdminDashboard_UserList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminDashboardServer).UserList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AdminDashboard/UserList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminDashboardServer).UserList(ctx, req.(*UserListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdminDashboard_SortUserByPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SortUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminDashboardServer).SortUserByPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AdminDashboard/SortUserByPermission",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminDashboardServer).SortUserByPermission(ctx, req.(*SortUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdminDashboard_SearchUserByname_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchUserBynameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminDashboardServer).SearchUserByname(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AdminDashboard/SearchUserByname",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminDashboardServer).SearchUserByname(ctx, req.(*SearchUserBynameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdminDashboard_SearchUserByid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchUserByidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminDashboardServer).SearchUserByid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AdminDashboard/SearchUserByid",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminDashboardServer).SearchUserByid(ctx, req.(*SearchUserByidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdminDashboard_TogglePermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TogglePermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminDashboardServer).TogglePermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AdminDashboard/TogglePermission",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminDashboardServer).TogglePermission(ctx, req.(*TogglePermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdminDashboard_CreateApparel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateApparelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminDashboardServer).CreateApparel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AdminDashboard/CreateApparel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminDashboardServer).CreateApparel(ctx, req.(*CreateApparelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdminDashboard_EditApparel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EditApparelResquest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminDashboardServer).EditApparel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AdminDashboard/EditApparel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminDashboardServer).EditApparel(ctx, req.(*EditApparelResquest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdminDashboard_DeleteApparel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteApparelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminDashboardServer).DeleteApparel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AdminDashboard/DeleteApparel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminDashboardServer).DeleteApparel(ctx, req.(*DeleteApparelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdminDashboard_AddCoupon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCouponRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminDashboardServer).AddCoupon(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AdminDashboard/AddCoupon",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminDashboardServer).AddCoupon(ctx, req.(*AddCouponRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdminDashboard_AddOffer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOfferRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminDashboardServer).AddOffer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.AdminDashboard/AddOffer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminDashboardServer).AddOffer(ctx, req.(*AddOfferRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// AdminDashboard_ServiceDesc is the grpc.ServiceDesc for AdminDashboard service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AdminDashboard_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pb.AdminDashboard",
+	HandlerType: (*AdminDashboardServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "MyMethod",
+			Handler:    _AdminDashboard_MyMethod_Handler,
+		},
+		{
+			MethodName: "UserList",
+			Handler:    _AdminDashboard_UserList_Handler,
+		},
+		{
+			MethodName: "SortUserByPermission",
+			Handler:    _AdminDashboard_SortUserByPermission_Handler,
+		},
+		{
+			MethodName: "SearchUserByname",
+			Handler:    _AdminDashboard_SearchUserByname_Handler,
+		},
+		{
+			MethodName: "SearchUserByid",
+			Handler:    _AdminDashboard_SearchUserByid_Handler,
+		},
+		{
+			MethodName: "TogglePermission",
+			Handler:    _AdminDashboard_TogglePermission_Handler,
+		},
+		{
+			MethodName: "CreateApparel",
+			Handler:    _AdminDashboard_CreateApparel_Handler,
+		},
+		{
+			MethodName: "EditApparel",
+			Handler:    _AdminDashboard_EditApparel_Handler,
+		},
+		{
+			MethodName: "DeleteApparel",
+			Handler:    _AdminDashboard_DeleteApparel_Handler,
+		},
+		{
+			MethodName: "AddCoupon",
+			Handler:    _AdminDashboard_AddCoupon_Handler,
+		},
+		{
+			MethodName: "AddOffer",
+			Handler:    _AdminDashboard_AddOffer_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}

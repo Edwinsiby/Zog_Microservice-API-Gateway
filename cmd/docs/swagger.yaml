@@ -154,7 +154,37 @@ paths:
             type: string
       summary: logout
       tags:
-      - User Authentication
+      - User&Admin Authentication
+  /service1/healthcheck:
+    get:
+      consumes:
+      - application/json
+      description: Service Health Check
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: admin&user Authentication service health check
+      tags:
+      - User&Admin Authentication
+  /service2/healthcheck:
+    get:
+      consumes:
+      - application/json
+      description: Service Health Check
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: admin dashboard service health check
+      tags:
+      - Admin Dashboard
   /user/loginwithotp:
     post:
       consumes:

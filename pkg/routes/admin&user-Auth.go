@@ -8,7 +8,7 @@ import (
 )
 
 func AuthenticationRoutes(r *gin.Engine, handlers *handlers.AuthenticationHandler) {
-	r.GET("/", handlers.IndexHandler)
+	r.GET("/service1/healthcheck", handlers.IndexHandler)
 	r.POST("/user/signup", handlers.UserSignup)
 	r.POST("/user/signupwithotp", handlers.SignupWithOtp)
 	r.POST("/user/signupotpvalidation", handlers.SignupOtpValidation)

@@ -30,8 +30,14 @@ func initializeAuthenticationHandler(cc *grpc.ClientConn) (*handlers.Authenticat
 	return handlers.NewAuthenticationHandler(cc), nil
 }
 
+func initializeAdminDashboardHandler(cc *grpc.ClientConn) (*handlers.AdminDashboardHandler, error) {
+	return handlers.NewAdminDashboardHandler(cc), nil
+}
+
 func InitializeApp() (*gin.Engine, error) {
 	r := gin.Default()
+
+	// Service1
 	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	authConn, err := grpc.Dial("localhost:5050", grpc.WithInsecure())
 	if err != nil {
@@ -43,6 +49,17 @@ func InitializeApp() (*gin.Engine, error) {
 		return nil, err
 	}
 	routes.AuthenticationRoutes(r, authenticationHandler)
+
+	// Service2
+	adminDashboardConn, err := grpc.Dial("localhost:5051", grpc.WithInsecure())
+	if err != nil {
+		return nil, err
+	}
+	adminDashboardHandler, err := initializeAdminDashboardHandler(adminDashboardConn)
+	if err != nil {
+		return nil, err
+	}
+	routes.AdminDashboardRoutes(r, adminDashboardHandler)
 
 	return r, nil
 }

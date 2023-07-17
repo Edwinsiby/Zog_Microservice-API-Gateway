@@ -105,12 +105,58 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Authentication"
+                    "User\u0026Admin Authentication"
                 ],
                 "summary": "logout",
                 "responses": {
                     "200": {
                         "description": "Success message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/service1/healthcheck": {
+            "get": {
+                "description": "Service Health Check",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User\u0026Admin Authentication"
+                ],
+                "summary": "admin\u0026user Authentication service health check",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/service2/healthcheck": {
+            "get": {
+                "description": "Service Health Check",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Dashboard"
+                ],
+                "summary": "admin dashboard service health check",
+                "responses": {
+                    "200": {
+                        "description": "OK",
                         "schema": {
                             "type": "string"
                         }
