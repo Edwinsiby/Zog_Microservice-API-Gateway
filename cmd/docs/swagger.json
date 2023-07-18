@@ -14,7 +14,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Add Address",
                 "parameters": [
@@ -48,7 +48,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Add product to cart",
                 "parameters": [
@@ -87,7 +87,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Add product to wishlist",
                 "parameters": [
@@ -529,7 +529,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Details of a Apparel",
                 "parameters": [
@@ -561,7 +561,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Apparel List",
                 "parameters": [
@@ -604,7 +604,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "checking coupon availability and adding offer amount",
                 "parameters": [
@@ -636,7 +636,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "checking coupon availability",
                 "responses": {
@@ -659,7 +659,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "User Home",
                 "responses": {
@@ -705,7 +705,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "checking offer availability",
                 "responses": {
@@ -728,7 +728,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Remove Product from cart",
                 "parameters": [
@@ -760,7 +760,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Remove Product from wishlist",
                 "parameters": [
@@ -799,7 +799,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Search Result",
                 "parameters": [
@@ -1140,7 +1140,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "User Cart",
                 "responses": {
@@ -1163,7 +1163,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Cart List",
                 "responses": {
@@ -1186,7 +1186,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Authentication"
+                    "User Dashboard"
                 ],
                 "summary": "User Details",
                 "responses": {
@@ -1209,7 +1209,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Wish List",
                 "responses": {

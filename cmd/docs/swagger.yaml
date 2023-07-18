@@ -239,7 +239,7 @@ paths:
             type: string
       summary: Add Address
       tags:
-      - User Shopping
+      - User Dashboard
   /addtocart/{category}/{productid}/{quantity}:
     post:
       consumes:
@@ -265,7 +265,7 @@ paths:
             type: string
       summary: Add product to cart
       tags:
-      - User Shopping
+      - User Dashboard
   /addtowishlist/{category}/{productid}:
     post:
       consumes:
@@ -291,7 +291,7 @@ paths:
             type: string
       summary: Add product to wishlist
       tags:
-      - User Shopping
+      - User Dashboard
   /admin/addapparel:
     post:
       consumes:
@@ -574,7 +574,7 @@ paths:
             $ref: '#/definitions/entity.ApparelDetails'
       summary: Details of a Apparel
       tags:
-      - User Shopping
+      - User Dashboard
   /apparels:
     get:
       consumes:
@@ -602,7 +602,7 @@ paths:
             $ref: '#/definitions/entity.Apparel'
       summary: Apparel List
       tags:
-      - User Shopping
+      - User Dashboard
   /applycoupon/{code}:
     post:
       consumes:
@@ -623,7 +623,7 @@ paths:
             type: string
       summary: checking coupon availability and adding offer amount
       tags:
-      - User Shopping
+      - User Dashboard
   /coupons:
     get:
       consumes:
@@ -638,7 +638,7 @@ paths:
             $ref: '#/definitions/entity.Coupon'
       summary: checking coupon availability
       tags:
-      - User Shopping
+      - User Dashboard
   /home:
     get:
       consumes:
@@ -653,7 +653,7 @@ paths:
             type: string
       summary: User Home
       tags:
-      - User Shopping
+      - User Dashboard
   /logout:
     post:
       consumes:
@@ -683,7 +683,7 @@ paths:
             type: string
       summary: checking offer availability
       tags:
-      - User Shopping
+      - User Dashboard
   /removefromcart/{product}/{id}:
     delete:
       consumes:
@@ -705,7 +705,7 @@ paths:
             type: string
       summary: Remove Product from cart
       tags:
-      - User Shopping
+      - User Dashboard
   /removefromwishlist/{product}/{id}:
     delete:
       consumes:
@@ -731,7 +731,7 @@ paths:
             type: string
       summary: Remove Product from wishlist
       tags:
-      - User Shopping
+      - User Dashboard
   /searchapparel:
     get:
       consumes:
@@ -759,7 +759,7 @@ paths:
             $ref: '#/definitions/entity.Apparel'
       summary: Search Result
       tags:
-      - User Shopping
+      - User Dashboard
   /service1/healthcheck:
     get:
       consumes:
@@ -970,7 +970,7 @@ paths:
             $ref: '#/definitions/entity.Cart'
       summary: User Cart
       tags:
-      - User Shopping
+      - User Dashboard
   /usercartlist:
     get:
       consumes:
@@ -985,7 +985,7 @@ paths:
             $ref: '#/definitions/entity.CartItem'
       summary: Cart List
       tags:
-      - User Shopping
+      - User Dashboard
   /userdetails:
     get:
       consumes:
@@ -1000,7 +1000,7 @@ paths:
             $ref: '#/definitions/entity.User'
       summary: User Details
       tags:
-      - User Authentication
+      - User Dashboard
   /userwishlist:
     get:
       consumes:
@@ -1015,5 +1015,5 @@ paths:
             $ref: '#/definitions/entity.Wishlist'
       summary: Wish List
       tags:
-      - User Shopping
+      - User Dashboard
 swagger: "2.0"

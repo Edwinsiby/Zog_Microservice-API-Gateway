@@ -26,7 +26,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Add Address",
                 "parameters": [
@@ -60,7 +60,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Add product to cart",
                 "parameters": [
@@ -99,7 +99,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Add product to wishlist",
                 "parameters": [
@@ -541,7 +541,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Details of a Apparel",
                 "parameters": [
@@ -573,7 +573,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Apparel List",
                 "parameters": [
@@ -616,7 +616,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "checking coupon availability and adding offer amount",
                 "parameters": [
@@ -648,7 +648,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "checking coupon availability",
                 "responses": {
@@ -671,7 +671,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "User Home",
                 "responses": {
@@ -717,7 +717,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "checking offer availability",
                 "responses": {
@@ -740,7 +740,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Remove Product from cart",
                 "parameters": [
@@ -772,7 +772,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Remove Product from wishlist",
                 "parameters": [
@@ -811,7 +811,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Search Result",
                 "parameters": [
@@ -1152,7 +1152,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "User Cart",
                 "responses": {
@@ -1175,7 +1175,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Cart List",
                 "responses": {
@@ -1198,7 +1198,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Authentication"
+                    "User Dashboard"
                 ],
                 "summary": "User Details",
                 "responses": {
@@ -1221,7 +1221,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Shopping"
+                    "User Dashboard"
                 ],
                 "summary": "Wish List",
                 "responses": {
@@ -1578,8 +1578,8 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
-	// LeftDelim:        "{{",
-	// RightDelim:       "}}",
+	LeftDelim:        "{{",
+	RightDelim:       "}}",
 }
 
 func init() {

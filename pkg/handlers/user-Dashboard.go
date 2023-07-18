@@ -49,7 +49,7 @@ func (a *UserDashboardHandler) UserDashboardHealthCheck(c *gin.Context) {
 //
 //	@Summary		User Home
 //	@Description	User home with the next navigations
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{string}	string	"Success message"
@@ -62,7 +62,7 @@ func (a *UserDashboardHandler) Home(c *gin.Context) {
 //
 //	@Summary		Add Address
 //	@Description	Add new address to the database with user id
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Param			user	body		entity.Address	true	"User Address"
@@ -97,7 +97,7 @@ func (a *UserDashboardHandler) AddAddress(c *gin.Context) {
 //
 //	@Summary		User Details
 //	@Description	User profile with adress and user details
-//	@Tags			User Authentication
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{object}	entity.User
@@ -120,7 +120,7 @@ func (a *UserDashboardHandler) ShowUserDetails(c *gin.Context) {
 //
 //	@Summary		Apparel List
 //	@Description	Showing the available Apparels in the site
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Param			page	query		int				false	"page no"
@@ -169,7 +169,7 @@ func (a *UserDashboardHandler) Apparels(c *gin.Context) {
 //
 //	@Summary		Details of a Apparel
 //	@Description	Showing details of a single product and option to adding cart
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Param			apparelid	path		string					true	"Apparel ID"
@@ -196,7 +196,7 @@ func (a *UserDashboardHandler) ApparelDetails(c *gin.Context) {
 //
 //	@Summary		Search Result
 //	@Description	Showing the available apparels as per user search
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Param			page	query		int				false	"page no"
@@ -245,7 +245,7 @@ func (a *UserDashboardHandler) SearchApparels(c *gin.Context) {
 //
 //	@Summary		Add product to cart
 //	@Description	Adding product with quantity to cart with product id
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Param			productid	path		string	true	"Product ID"
@@ -285,7 +285,7 @@ func (a *UserDashboardHandler) AddToCart(c *gin.Context) {
 //
 //	@Summary		Add product to wishlist
 //	@Description	Adding single product to wishlist with product id
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Param			category	path		string	true	"Ticket/Apparel"
@@ -317,7 +317,7 @@ func (a *UserDashboardHandler) AddToWishlist(c *gin.Context) {
 //
 //	@Summary		User Cart
 //	@Description	Showing user cart
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{object}	entity.Cart	"User Cart"
@@ -342,7 +342,7 @@ func (a *UserDashboardHandler) Cart(c *gin.Context) {
 //
 //	@Summary		Cart List
 //	@Description	Showing the products in user cart
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{object}	entity.CartItem	"Cart List"
@@ -365,7 +365,7 @@ func (a *UserDashboardHandler) CartList(c *gin.Context) {
 //
 //	@Summary		Remove Product from cart
 //	@Description	Removing product from the cart for unique and decrese quantity for existing product
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Param			id		path		int		true	"Product ID"
@@ -396,7 +396,7 @@ func (a *UserDashboardHandler) RemoveFromCart(c *gin.Context) {
 //
 //	@Summary		Remove Product from wishlist
 //	@Description	Removing product from the user wishlist
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Param			product	path		string	true	"ticket/apparel"
@@ -428,7 +428,7 @@ func (a *UserDashboardHandler) RemoveFromWishlist(c *gin.Context) {
 //
 //	@Summary		Wish List
 //	@Description	Showing the products in user wishlist
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{object}	entity.Wishlist	"Wishlist"
@@ -451,7 +451,7 @@ func (a *UserDashboardHandler) ViewWishlist(c *gin.Context) {
 //
 //	@Summary		checking coupon availability
 //	@Description	showing the available coupons and eligibility
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{object}	entity.Coupon	"Available coupons"
@@ -469,7 +469,7 @@ func (a *UserDashboardHandler) AvailableCoupons(c *gin.Context) {
 //
 //	@Summary		checking coupon availability and adding offer amount
 //	@Description	applying coupon offer for user cart amount
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Param			code	path		string	true	"coupon code"
@@ -496,7 +496,7 @@ func (a *UserDashboardHandler) ApplyCoupon(c *gin.Context) {
 //
 //	@Summary		checking offer availability
 //	@Description	finding and showing offer for user with respect to user cart
-//	@Tags			User Shopping
+//	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{string}	string	"offers"
