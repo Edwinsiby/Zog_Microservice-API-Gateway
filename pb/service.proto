@@ -394,7 +394,9 @@ message WishlistResponse{
   repeated Apparel appares = 1;
 }
 
-message AvailableCouponsRequest{}
+message AvailableCouponsRequest{
+  int32 userid = 1;
+}
 
 message Coupon{
    string code = 1;

@@ -358,7 +358,7 @@ func (a *UserDashboardHandler) CartList(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"Cart List": cartItems})
+	c.JSON(http.StatusOK, gin.H{"Cart List": resp})
 }
 
 // RemoveFromCart godoc
@@ -407,18 +407,21 @@ func (a *UserDashboardHandler) RemoveFromWishlist(c *gin.Context) {
 	userID, _ := c.Get("userID")
 	userId := userID.(int)
 	id := c.Param("id")
-	product := c.Param("product")
 	Id, err := strconv.Atoi(id)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "str conversion failed"})
 		return
 	}
-	err = uh.CartUsecase.ExecuteRemoveFromWishlist(product, Id, userId)
+	req := &pb.RemoveFromCartRequest{
+		Userid:    int32(userId),
+		Productid: int32(Id),
+	}
+	resp, err := a.grpcClient.RemoveFromCart(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"message": "Product removed from wishlist successfully"})
+	c.JSON(http.StatusOK, gin.H{"message": resp.Result})
 }
 
 // Wishlist    godoc
@@ -433,12 +436,15 @@ func (a *UserDashboardHandler) RemoveFromWishlist(c *gin.Context) {
 func (a *UserDashboardHandler) ViewWishlist(c *gin.Context) {
 	userID, _ := c.Get("userID")
 	userId := userID.(int)
-	wishList, err1 := u.CartUsecase.ExecuteViewWishlist(userId)
-	if err1 != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err1.Error()})
+	req := &pb.WishlistRequest{
+		Userid: int32(userId),
+	}
+	resp, err := a.grpcClient.Wishlist(context.Background(), req)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"Wish List": wishList})
+	c.JSON(http.StatusOK, gin.H{"Wish List": resp})
 }
 
 // Available Coupon  godoc
@@ -451,12 +457,12 @@ func (a *UserDashboardHandler) ViewWishlist(c *gin.Context) {
 //	@Success		200	{object}	entity.Coupon	"Available coupons"
 //	@Router			/coupons [get]
 func (a *UserDashboardHandler) AvailableCoupons(c *gin.Context) {
-	couponList, err := u.ProductUsecase.ExecuteAvailableCoupons()
+	resp, err := a.grpcClient.AvailableCoupons(context.Background(), nil)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"Available coupons are ": couponList})
+	c.JSON(http.StatusOK, gin.H{"Available coupons are ": resp})
 }
 
 // Apply Coupon  godoc
@@ -473,13 +479,16 @@ func (a *UserDashboardHandler) ApplyCoupon(c *gin.Context) {
 	userID, _ := c.Get("userID")
 	userId := userID.(int)
 	code := c.Param("code")
-
-	totalOffer, err := u.CartUsecase.ExecuteApplyCoupon(userId, code)
+	req := &pb.ApplyCouponRequest{
+		Userid: int32(userId),
+		Code:   code,
+	}
+	resp, err := a.grpcClient.ApplyCoupon(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	} else {
-		c.JSON(http.StatusOK, gin.H{"Offer price for coupon is ": totalOffer, "Offer": "Applied succesfuly"})
+		c.JSON(http.StatusOK, gin.H{"Offer price for coupon is ": resp.Result, "Offer": "Applied succesfuly"})
 	}
 }
 
@@ -495,13 +504,16 @@ func (a *UserDashboardHandler) ApplyCoupon(c *gin.Context) {
 func (a *UserDashboardHandler) OfferCheck(c *gin.Context) {
 	userID, _ := c.Get("userID")
 	userId := userID.(int)
-	offerList, err := u.CartUsecase.ExecuteOfferCheck(userId)
+	req := &pb.OfferCheckRequest{
+		Userid: int32(userId),
+	}
+	resp, err := a.grpcClient.OfferCheck(c.Request.Context(), req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
-	} else if offerList == nil {
+	} else if resp == nil {
 		c.JSON(http.StatusOK, gin.H{"No offers": "Add few more products"})
 	} else {
-		c.JSON(http.StatusOK, gin.H{"Available offers are ": offerList})
+		c.JSON(http.StatusOK, gin.H{"Available offers are ": resp})
 	}
 }
