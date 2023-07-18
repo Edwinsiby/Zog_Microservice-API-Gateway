@@ -51,6 +51,9 @@ service UserDashboard{
   rpc OfferCheck(OfferCheckRequest)returns(OfferCheckResponse){}
 }
 
+service Order{
+  rpc MyMethod(Request) returns (Response);
+}
 
 message Request {
   string data = 1;

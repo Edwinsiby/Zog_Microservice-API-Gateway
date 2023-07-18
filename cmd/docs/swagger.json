@@ -626,6 +626,38 @@
                 }
             }
         },
+        "/cancelorder/{orderid}": {
+            "put": {
+                "description": "canceling the order from user side and admin side",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin\u0026User Order Management"
+                ],
+                "summary": "Order Cancelation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Order Id",
+                        "name": "orderid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/coupons": {
             "get": {
                 "description": "showing the available coupons and eligibility",
@@ -718,6 +750,185 @@
                 }
             }
         },
+        "/orderhistory": {
+            "get": {
+                "description": "showing the history of orders to the user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin\u0026User Order Management"
+                ],
+                "summary": "Order History",
+                "responses": {
+                    "200": {
+                        "description": "Success message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/orderreturn/{orderid}": {
+            "post": {
+                "description": "Returning the orders which are delivered to the user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin\u0026User Order Management"
+                ],
+                "summary": "Return delivered order",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "orderid",
+                        "name": "orderid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "wrong product-product quality-late delivery-other",
+                        "name": "reason",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success massage",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/paymentverification/{sign}/{razorid}/{payid}": {
+            "post": {
+                "description": "After placing order - checking the status of online payment",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin\u0026User Order Management"
+                ],
+                "summary": "Payment Verification",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Payment signature",
+                        "name": "sign",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Razor Order Id",
+                        "name": "razorid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Razor Payment Id",
+                        "name": "payid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/placeorder/{addressid}/{payment}": {
+            "post": {
+                "description": "Placing order from user side with respect to the payment method",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin\u0026User Order Management"
+                ],
+                "summary": "Place Order",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "address id",
+                        "name": "addressid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "payment method",
+                        "name": "payment",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/refund/{orderid}": {
+            "post": {
+                "description": "Transfering the total amount of order to wallet or other methods",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin\u0026User Order Management"
+                ],
+                "summary": "Aproving refund by admin",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "order return id",
+                        "name": "orderid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success massage",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/removefromcart/{product}/{id}": {
             "delete": {
                 "description": "Removing product from the cart for unique and decrese quantity for existing product",
@@ -775,6 +986,116 @@
                         "type": "integer",
                         "description": "Product ID",
                         "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/salesreportbycategory/{category}/{period}": {
+            "get": {
+                "description": "Showing the report of sales with respect to product category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin\u0026User Order Management"
+                ],
+                "summary": "Sales report by product category",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Category",
+                        "name": "category",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "period",
+                        "name": "period",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "report",
+                        "schema": {
+                            "type": "body"
+                        }
+                    }
+                }
+            }
+        },
+        "/salesreportbydate/{start}/{end}": {
+            "get": {
+                "description": "Showing the sales report with respect to the given date",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin\u0026User Order Management"
+                ],
+                "summary": "Sales report by date",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "start date D-M-Y",
+                        "name": "start",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "end date D-M-Y",
+                        "name": "end",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "report",
+                        "schema": {
+                            "type": "body"
+                        }
+                    }
+                }
+            }
+        },
+        "/salesreportbyperiod/{period}": {
+            "get": {
+                "description": "Showing the report of sales for last week,month and year",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin\u0026User Order Management"
+                ],
+                "summary": "Sales report by time period",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Weekly Monthlt Yearly",
+                        "name": "period",
                         "in": "path",
                         "required": true
                     }
@@ -894,6 +1215,146 @@
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/service4/healthcheck": {
+            "get": {
+                "description": "Service Health Check",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin\u0026User Order Management"
+                ],
+                "summary": "order service health check",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/sortorders": {
+            "post": {
+                "description": "Showing the sorted list of orders in admin panel",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin\u0026User Order Management"
+                ],
+                "summary": "Sorting orders by order status",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Status",
+                        "name": "status",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "sorted orders",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Order"
+                        }
+                    }
+                }
+            }
+        },
+        "/updateorder/{orderid}/{status}": {
+            "put": {
+                "description": "Updating the order status by admin",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin\u0026User Order Management"
+                ],
+                "summary": "Update order status",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Order Id",
+                        "name": "orderid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success massage",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/updatereturn/{returnid}/{status}/{refund}": {
+            "post": {
+                "description": "Updating the retunr status by admin and implimenting refund",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin\u0026User Order Management"
+                ],
+                "summary": "Updating return status and refund",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Return Id",
+                        "name": "returnid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "refund method -wallet -account",
+                        "name": "refund",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "updated succesfuly",
                         "schema": {
                             "type": "string"
                         }
@@ -1487,6 +1948,35 @@
                 },
                 "valid_until": {
                     "type": "string"
+                }
+            }
+        },
+        "entity.Order": {
+            "type": "object",
+            "properties": {
+                "adressid": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "paymentid": {
+                    "type": "string"
+                },
+                "paymentmethod": {
+                    "type": "string"
+                },
+                "paymentstatus": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "number"
+                },
+                "userid": {
+                    "type": "integer"
                 }
             }
         },

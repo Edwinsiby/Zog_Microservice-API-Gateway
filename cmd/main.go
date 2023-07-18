@@ -38,6 +38,10 @@ func initializeUserDashboardHandler(cc *grpc.ClientConn) (*handlers.UserDashboar
 	return handlers.NewUserDashboardHandler(cc), nil
 }
 
+func initializeOrderHandler(cc *grpc.ClientConn) (*handlers.OrderHandler, error) {
+	return handlers.NewOrderHandler(cc), nil
+}
+
 func InitializeApp() (*gin.Engine, error) {
 	r := gin.Default()
 
@@ -76,5 +80,17 @@ func InitializeApp() (*gin.Engine, error) {
 		return nil, err
 	}
 	routes.UserDashboardRoutes(r, userDashboardHandler)
+
+	// Service4
+	orderConn, err := grpc.Dial("localhost:5053", grpc.WithInsecure())
+	if err != nil {
+		return nil, err
+	}
+	orderHandler, err := initializeOrderHandler(orderConn)
+	if err != nil {
+		return nil, err
+	}
+	routes.OrderRoutes(r, orderHandler)
+
 	return r, nil
 }

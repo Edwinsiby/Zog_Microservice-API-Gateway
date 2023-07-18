@@ -173,6 +173,25 @@ definitions:
       valid_until:
         type: string
     type: object
+  entity.Order:
+    properties:
+      adressid:
+        type: integer
+      id:
+        type: integer
+      paymentid:
+        type: string
+      paymentmethod:
+        type: string
+      paymentstatus:
+        type: string
+      status:
+        type: string
+      total:
+        type: number
+      userid:
+        type: integer
+    type: object
   entity.Signup:
     properties:
       email:
@@ -624,6 +643,27 @@ paths:
       summary: checking coupon availability and adding offer amount
       tags:
       - User Dashboard
+  /cancelorder/{orderid}:
+    put:
+      consumes:
+      - application/json
+      description: canceling the order from user side and admin side
+      parameters:
+      - description: Order Id
+        in: path
+        name: orderid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            type: string
+      summary: Order Cancelation
+      tags:
+      - Admin&User Order Management
   /coupons:
     get:
       consumes:
@@ -684,6 +724,125 @@ paths:
       summary: checking offer availability
       tags:
       - User Dashboard
+  /orderhistory:
+    get:
+      consumes:
+      - application/json
+      description: showing the history of orders to the user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            type: string
+      summary: Order History
+      tags:
+      - Admin&User Order Management
+  /orderreturn/{orderid}:
+    post:
+      consumes:
+      - application/json
+      description: Returning the orders which are delivered to the user
+      parameters:
+      - description: orderid
+        in: path
+        name: orderid
+        required: true
+        type: string
+      - description: wrong product-product quality-late delivery-other
+        in: path
+        name: reason
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success massage
+          schema:
+            type: string
+      summary: Return delivered order
+      tags:
+      - Admin&User Order Management
+  /paymentverification/{sign}/{razorid}/{payid}:
+    post:
+      consumes:
+      - application/json
+      description: After placing order - checking the status of online payment
+      parameters:
+      - description: Payment signature
+        in: path
+        name: sign
+        required: true
+        type: string
+      - description: Razor Order Id
+        in: path
+        name: razorid
+        required: true
+        type: string
+      - description: Razor Payment Id
+        in: path
+        name: payid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            type: string
+      summary: Payment Verification
+      tags:
+      - Admin&User Order Management
+  /placeorder/{addressid}/{payment}:
+    post:
+      consumes:
+      - application/json
+      description: Placing order from user side with respect to the payment method
+      parameters:
+      - description: address id
+        in: path
+        name: addressid
+        required: true
+        type: string
+      - description: payment method
+        in: path
+        name: payment
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            type: string
+      summary: Place Order
+      tags:
+      - Admin&User Order Management
+  /refund/{orderid}:
+    post:
+      consumes:
+      - application/json
+      description: Transfering the total amount of order to wallet or other methods
+      parameters:
+      - description: order return id
+        in: path
+        name: orderid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success massage
+          schema:
+            type: string
+      summary: Aproving refund by admin
+      tags:
+      - Admin&User Order Management
   /removefromcart/{product}/{id}:
     delete:
       consumes:
@@ -732,6 +891,79 @@ paths:
       summary: Remove Product from wishlist
       tags:
       - User Dashboard
+  /salesreportbycategory/{category}/{period}:
+    get:
+      consumes:
+      - application/json
+      description: Showing the report of sales with respect to product category
+      parameters:
+      - description: Category
+        in: path
+        name: category
+        required: true
+        type: string
+      - description: period
+        in: path
+        name: period
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: report
+          schema:
+            type: body
+      summary: Sales report by product category
+      tags:
+      - Admin&User Order Management
+  /salesreportbydate/{start}/{end}:
+    get:
+      consumes:
+      - application/json
+      description: Showing the sales report with respect to the given date
+      parameters:
+      - description: start date D-M-Y
+        in: path
+        name: start
+        required: true
+        type: string
+      - description: end date D-M-Y
+        in: path
+        name: end
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: report
+          schema:
+            type: body
+      summary: Sales report by date
+      tags:
+      - Admin&User Order Management
+  /salesreportbyperiod/{period}:
+    get:
+      consumes:
+      - application/json
+      description: Showing the report of sales for last week,month and year
+      parameters:
+      - description: Weekly Monthlt Yearly
+        in: path
+        name: period
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            type: string
+      summary: Sales report by time period
+      tags:
+      - Admin&User Order Management
   /searchapparel:
     get:
       consumes:
@@ -805,6 +1037,99 @@ paths:
       summary: user dashboard service health check
       tags:
       - User Dashboard
+  /service4/healthcheck:
+    get:
+      consumes:
+      - application/json
+      description: Service Health Check
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: order service health check
+      tags:
+      - Admin&User Order Management
+  /sortorders:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Showing the sorted list of orders in admin panel
+      parameters:
+      - description: Status
+        in: formData
+        name: status
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: sorted orders
+          schema:
+            $ref: '#/definitions/entity.Order'
+      summary: Sorting orders by order status
+      tags:
+      - Admin&User Order Management
+  /updateorder/{orderid}/{status}:
+    put:
+      consumes:
+      - application/json
+      description: Updating the order status by admin
+      parameters:
+      - description: Order Id
+        in: path
+        name: orderid
+        required: true
+        type: string
+      - description: status
+        in: path
+        name: status
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success massage
+          schema:
+            type: string
+      summary: Update order status
+      tags:
+      - Admin&User Order Management
+  /updatereturn/{returnid}/{status}/{refund}:
+    post:
+      consumes:
+      - application/json
+      description: Updating the retunr status by admin and implimenting refund
+      parameters:
+      - description: Return Id
+        in: path
+        name: returnid
+        required: true
+        type: string
+      - description: status
+        in: path
+        name: status
+        required: true
+        type: string
+      - description: refund method -wallet -account
+        in: path
+        name: refund
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: updated succesfuly
+          schema:
+            type: string
+      summary: Updating return status and refund
+      tags:
+      - Admin&User Order Management
   /user/loginwithotp:
     post:
       consumes:

@@ -4491,7 +4491,10 @@ var file_service_proto_rawDesc = []byte{
 	0x65, 0x72, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x12, 0x15, 0x2e, 0x70, 0x62, 0x2e, 0x4f, 0x66, 0x66,
 	0x65, 0x72, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16,
 	0x2e, 0x70, 0x62, 0x2e, 0x4f, 0x66, 0x66, 0x65, 0x72, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x03, 0x5a, 0x01, 0x2e, 0x62, 0x06, 0x70,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x32, 0x2e, 0x0a, 0x05, 0x4f, 0x72, 0x64, 0x65,
+	0x72, 0x12, 0x25, 0x0a, 0x08, 0x4d, 0x79, 0x4d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x12, 0x0b, 0x2e,
+	0x70, 0x62, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0c, 0x2e, 0x70, 0x62, 0x2e,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x03, 0x5a, 0x01, 0x2e, 0x62, 0x06, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
@@ -4632,45 +4635,47 @@ var file_service_proto_depIdxs = []int32{
 	64, // 47: pb.UserDashboard.AvailableCoupons:input_type -> pb.AvailableCouponsRequest
 	67, // 48: pb.UserDashboard.ApplyCoupon:input_type -> pb.ApplyCouponRequest
 	69, // 49: pb.UserDashboard.OfferCheck:input_type -> pb.OfferCheckRequest
-	1,  // 50: pb.MyService.MyMethod:output_type -> pb.Response
-	3,  // 51: pb.MyService.CreateUser:output_type -> pb.CreateUserResponse
-	5,  // 52: pb.MyService.CreateUserWithOtp:output_type -> pb.CreateUserWithOtpResponse
-	7,  // 53: pb.MyService.SignupOtpValidation:output_type -> pb.OtpValidationResponse
-	9,  // 54: pb.MyService.LoginWithOtp:output_type -> pb.LoginWithOtpResponse
-	10, // 55: pb.MyService.LoginOtpValidation:output_type -> pb.LoginOtpValidationResponse
-	12, // 56: pb.MyService.LoginWithPassword:output_type -> pb.LoginWithPasswordResponse
-	14, // 57: pb.MyService.RegisterAdmin:output_type -> pb.RegisterAdminResponse
-	12, // 58: pb.MyService.AdminLoginWithPassword:output_type -> pb.LoginWithPasswordResponse
-	1,  // 59: pb.AdminDashboard.MyMethod:output_type -> pb.Response
-	16, // 60: pb.AdminDashboard.UserList:output_type -> pb.UserListResponse
-	19, // 61: pb.AdminDashboard.SortUserByPermission:output_type -> pb.SortUserResponse
-	21, // 62: pb.AdminDashboard.SearchUserByname:output_type -> pb.SearchUserBynameResponse
-	23, // 63: pb.AdminDashboard.SearchUserByid:output_type -> pb.SearchUserByidResponse
-	25, // 64: pb.AdminDashboard.TogglePermission:output_type -> pb.TogglePermissionResponse
-	27, // 65: pb.AdminDashboard.CreateApparel:output_type -> pb.CreateApparelResponse
-	29, // 66: pb.AdminDashboard.EditApparel:output_type -> pb.EditApparelResponse
-	31, // 67: pb.AdminDashboard.DeleteApparel:output_type -> pb.DeleteApparelResponse
-	33, // 68: pb.AdminDashboard.AddCoupon:output_type -> pb.AddCouponResponse
-	35, // 69: pb.AdminDashboard.AddOffer:output_type -> pb.AddOfferResponse
-	1,  // 70: pb.UserDashboard.MyMethod:output_type -> pb.Response
-	37, // 71: pb.UserDashboard.Home:output_type -> pb.HomeResponse
-	39, // 72: pb.UserDashboard.AddAddress:output_type -> pb.AddAddressResponse
-	42, // 73: pb.UserDashboard.UserDetails:output_type -> pb.UserDetailsResponse
-	45, // 74: pb.UserDashboard.Apparels:output_type -> pb.ApparelsResponse
-	47, // 75: pb.UserDashboard.ApparelDetails:output_type -> pb.ApparelDetailsResponse
-	49, // 76: pb.UserDashboard.SearchApparels:output_type -> pb.SearchApparelsResponse
-	51, // 77: pb.UserDashboard.AddToCart:output_type -> pb.AddToCartResponse
-	53, // 78: pb.UserDashboard.AddToWishList:output_type -> pb.AddToWishListResponse
-	55, // 79: pb.UserDashboard.Cart:output_type -> pb.CartResponse
-	57, // 80: pb.UserDashboard.CartList:output_type -> pb.CartListResponse
-	59, // 81: pb.UserDashboard.RemoveFromCart:output_type -> pb.RemoveFromCartResponse
-	61, // 82: pb.UserDashboard.RemoveFromWishlist:output_type -> pb.RemoveFromWishlistResponse
-	63, // 83: pb.UserDashboard.Wishlist:output_type -> pb.WishlistResponse
-	66, // 84: pb.UserDashboard.AvailableCoupons:output_type -> pb.AvailableCouponsResponse
-	68, // 85: pb.UserDashboard.ApplyCoupon:output_type -> pb.ApplyCouponResponse
-	70, // 86: pb.UserDashboard.OfferCheck:output_type -> pb.OfferCheckResponse
-	50, // [50:87] is the sub-list for method output_type
-	13, // [13:50] is the sub-list for method input_type
+	0,  // 50: pb.Order.MyMethod:input_type -> pb.Request
+	1,  // 51: pb.MyService.MyMethod:output_type -> pb.Response
+	3,  // 52: pb.MyService.CreateUser:output_type -> pb.CreateUserResponse
+	5,  // 53: pb.MyService.CreateUserWithOtp:output_type -> pb.CreateUserWithOtpResponse
+	7,  // 54: pb.MyService.SignupOtpValidation:output_type -> pb.OtpValidationResponse
+	9,  // 55: pb.MyService.LoginWithOtp:output_type -> pb.LoginWithOtpResponse
+	10, // 56: pb.MyService.LoginOtpValidation:output_type -> pb.LoginOtpValidationResponse
+	12, // 57: pb.MyService.LoginWithPassword:output_type -> pb.LoginWithPasswordResponse
+	14, // 58: pb.MyService.RegisterAdmin:output_type -> pb.RegisterAdminResponse
+	12, // 59: pb.MyService.AdminLoginWithPassword:output_type -> pb.LoginWithPasswordResponse
+	1,  // 60: pb.AdminDashboard.MyMethod:output_type -> pb.Response
+	16, // 61: pb.AdminDashboard.UserList:output_type -> pb.UserListResponse
+	19, // 62: pb.AdminDashboard.SortUserByPermission:output_type -> pb.SortUserResponse
+	21, // 63: pb.AdminDashboard.SearchUserByname:output_type -> pb.SearchUserBynameResponse
+	23, // 64: pb.AdminDashboard.SearchUserByid:output_type -> pb.SearchUserByidResponse
+	25, // 65: pb.AdminDashboard.TogglePermission:output_type -> pb.TogglePermissionResponse
+	27, // 66: pb.AdminDashboard.CreateApparel:output_type -> pb.CreateApparelResponse
+	29, // 67: pb.AdminDashboard.EditApparel:output_type -> pb.EditApparelResponse
+	31, // 68: pb.AdminDashboard.DeleteApparel:output_type -> pb.DeleteApparelResponse
+	33, // 69: pb.AdminDashboard.AddCoupon:output_type -> pb.AddCouponResponse
+	35, // 70: pb.AdminDashboard.AddOffer:output_type -> pb.AddOfferResponse
+	1,  // 71: pb.UserDashboard.MyMethod:output_type -> pb.Response
+	37, // 72: pb.UserDashboard.Home:output_type -> pb.HomeResponse
+	39, // 73: pb.UserDashboard.AddAddress:output_type -> pb.AddAddressResponse
+	42, // 74: pb.UserDashboard.UserDetails:output_type -> pb.UserDetailsResponse
+	45, // 75: pb.UserDashboard.Apparels:output_type -> pb.ApparelsResponse
+	47, // 76: pb.UserDashboard.ApparelDetails:output_type -> pb.ApparelDetailsResponse
+	49, // 77: pb.UserDashboard.SearchApparels:output_type -> pb.SearchApparelsResponse
+	51, // 78: pb.UserDashboard.AddToCart:output_type -> pb.AddToCartResponse
+	53, // 79: pb.UserDashboard.AddToWishList:output_type -> pb.AddToWishListResponse
+	55, // 80: pb.UserDashboard.Cart:output_type -> pb.CartResponse
+	57, // 81: pb.UserDashboard.CartList:output_type -> pb.CartListResponse
+	59, // 82: pb.UserDashboard.RemoveFromCart:output_type -> pb.RemoveFromCartResponse
+	61, // 83: pb.UserDashboard.RemoveFromWishlist:output_type -> pb.RemoveFromWishlistResponse
+	63, // 84: pb.UserDashboard.Wishlist:output_type -> pb.WishlistResponse
+	66, // 85: pb.UserDashboard.AvailableCoupons:output_type -> pb.AvailableCouponsResponse
+	68, // 86: pb.UserDashboard.ApplyCoupon:output_type -> pb.ApplyCouponResponse
+	70, // 87: pb.UserDashboard.OfferCheck:output_type -> pb.OfferCheckResponse
+	1,  // 88: pb.Order.MyMethod:output_type -> pb.Response
+	51, // [51:89] is the sub-list for method output_type
+	13, // [13:51] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name
 	13, // [13:13] is the sub-list for extension extendee
 	0,  // [0:13] is the sub-list for field type_name
@@ -5543,7 +5548,7 @@ func file_service_proto_init() {
 			NumEnums:      0,
 			NumMessages:   71,
 			NumExtensions: 0,
-			NumServices:   3,
+			NumServices:   4,
 		},
 		GoTypes:           file_service_proto_goTypes,
 		DependencyIndexes: file_service_proto_depIdxs,
