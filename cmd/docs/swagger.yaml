@@ -1,4 +1,19 @@
 definitions:
+  entity.Address:
+    properties:
+      city:
+        type: string
+      house:
+        type: string
+      id:
+        type: integer
+      pincode:
+        type: integer
+      street:
+        type: string
+      type:
+        type: string
+    type: object
   entity.Admin:
     properties:
       active:
@@ -52,6 +67,17 @@ definitions:
       subcategory:
         type: string
     type: object
+  entity.ApparelDetails:
+    properties:
+      apparelid:
+        type: integer
+      color:
+        type: string
+      description:
+        type: string
+      size:
+        type: string
+    type: object
   entity.ApparelInput:
     properties:
       apparelid:
@@ -80,6 +106,30 @@ definitions:
         type: string
       subcategory:
         type: string
+    type: object
+  entity.Cart:
+    properties:
+      apparelquantity:
+        type: integer
+      offerprice:
+        type: integer
+      ticketquantity:
+        type: integer
+      totalprice:
+        type: number
+    type: object
+  entity.CartItem:
+    properties:
+      category:
+        type: string
+      price:
+        type: number
+      productid:
+        type: integer
+      productname:
+        type: string
+      quantity:
+        type: integer
     type: object
   entity.Coupon:
     properties:
@@ -154,9 +204,94 @@ definitions:
     - lastname
     - phone
     type: object
+  entity.Wishlist:
+    properties:
+      category:
+        type: string
+      price:
+        type: number
+      productid:
+        type: integer
+      productname:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
+  /addaddress:
+    post:
+      consumes:
+      - application/json
+      description: Add new address to the database with user id
+      parameters:
+      - description: User Address
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Address'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            type: string
+      summary: Add Address
+      tags:
+      - User Shopping
+  /addtocart/{category}/{productid}/{quantity}:
+    post:
+      consumes:
+      - application/json
+      description: Adding product with quantity to cart with product id
+      parameters:
+      - description: Product ID
+        in: path
+        name: productid
+        required: true
+        type: string
+      - description: Product Quantity
+        in: path
+        name: quantity
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            type: string
+      summary: Add product to cart
+      tags:
+      - User Shopping
+  /addtowishlist/{category}/{productid}:
+    post:
+      consumes:
+      - application/json
+      description: Adding single product to wishlist with product id
+      parameters:
+      - description: Ticket/Apparel
+        in: path
+        name: category
+        required: true
+        type: string
+      - description: Product ID
+        in: path
+        name: productid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            type: string
+      summary: Add product to wishlist
+      tags:
+      - User Shopping
   /admin/addapparel:
     post:
       consumes:
@@ -419,6 +554,106 @@ paths:
       summary: block/unblock user
       tags:
       - Admin Dashboard
+  /appareldetails/{apparelid}:
+    get:
+      consumes:
+      - application/json
+      description: Showing details of a single product and option to adding cart
+      parameters:
+      - description: Apparel ID
+        in: path
+        name: apparelid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Apparel Details
+          schema:
+            $ref: '#/definitions/entity.ApparelDetails'
+      summary: Details of a Apparel
+      tags:
+      - User Shopping
+  /apparels:
+    get:
+      consumes:
+      - application/json
+      description: Showing the available Apparels in the site
+      parameters:
+      - description: page no
+        in: query
+        name: page
+        type: integer
+      - description: limit no
+        in: query
+        name: limit
+        type: integer
+      - description: Sort by Category
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Apparel List
+          schema:
+            $ref: '#/definitions/entity.Apparel'
+      summary: Apparel List
+      tags:
+      - User Shopping
+  /applycoupon/{code}:
+    post:
+      consumes:
+      - application/json
+      description: applying coupon offer for user cart amount
+      parameters:
+      - description: coupon code
+        in: path
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: total amount
+          schema:
+            type: string
+      summary: checking coupon availability and adding offer amount
+      tags:
+      - User Shopping
+  /coupons:
+    get:
+      consumes:
+      - application/json
+      description: showing the available coupons and eligibility
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Available coupons
+          schema:
+            $ref: '#/definitions/entity.Coupon'
+      summary: checking coupon availability
+      tags:
+      - User Shopping
+  /home:
+    get:
+      consumes:
+      - application/json
+      description: User home with the next navigations
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            type: string
+      summary: User Home
+      tags:
+      - User Shopping
   /logout:
     post:
       consumes:
@@ -434,6 +669,97 @@ paths:
       summary: logout
       tags:
       - User&Admin Authentication
+  /offer:
+    get:
+      consumes:
+      - application/json
+      description: finding and showing offer for user with respect to user cart
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: offers
+          schema:
+            type: string
+      summary: checking offer availability
+      tags:
+      - User Shopping
+  /removefromcart/{product}/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Removing product from the cart for unique and decrese quantity
+        for existing product
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            type: string
+      summary: Remove Product from cart
+      tags:
+      - User Shopping
+  /removefromwishlist/{product}/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Removing product from the user wishlist
+      parameters:
+      - description: ticket/apparel
+        in: path
+        name: product
+        required: true
+        type: string
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            type: string
+      summary: Remove Product from wishlist
+      tags:
+      - User Shopping
+  /searchapparel:
+    get:
+      consumes:
+      - application/json
+      description: Showing the available apparels as per user search
+      parameters:
+      - description: page no
+        in: query
+        name: page
+        type: integer
+      - description: limit no
+        in: query
+        name: limit
+        type: integer
+      - description: Search By Name
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Apparel Data
+          schema:
+            $ref: '#/definitions/entity.Apparel'
+      summary: Search Result
+      tags:
+      - User Shopping
   /service1/healthcheck:
     get:
       consumes:
@@ -630,4 +956,64 @@ paths:
       summary: signup with opt validation
       tags:
       - User&Admin Authentication
+  /usercart:
+    get:
+      consumes:
+      - application/json
+      description: Showing user cart
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User Cart
+          schema:
+            $ref: '#/definitions/entity.Cart'
+      summary: User Cart
+      tags:
+      - User Shopping
+  /usercartlist:
+    get:
+      consumes:
+      - application/json
+      description: Showing the products in user cart
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Cart List
+          schema:
+            $ref: '#/definitions/entity.CartItem'
+      summary: Cart List
+      tags:
+      - User Shopping
+  /userdetails:
+    get:
+      consumes:
+      - application/json
+      description: User profile with adress and user details
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.User'
+      summary: User Details
+      tags:
+      - User Authentication
+  /userwishlist:
+    get:
+      consumes:
+      - application/json
+      description: Showing the products in user wishlist
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Wishlist
+          schema:
+            $ref: '#/definitions/entity.Wishlist'
+      summary: Wish List
+      tags:
+      - User Shopping
 swagger: "2.0"

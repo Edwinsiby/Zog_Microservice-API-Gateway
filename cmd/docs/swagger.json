@@ -4,6 +4,118 @@
         "contact": {}
     },
     "paths": {
+        "/addaddress": {
+            "post": {
+                "description": "Add new address to the database with user id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "Add Address",
+                "parameters": [
+                    {
+                        "description": "User Address",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.Address"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/addtocart/{category}/{productid}/{quantity}": {
+            "post": {
+                "description": "Adding product with quantity to cart with product id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "Add product to cart",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Product ID",
+                        "name": "productid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Product Quantity",
+                        "name": "quantity",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/addtowishlist/{category}/{productid}": {
+            "post": {
+                "description": "Adding single product to wishlist with product id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "Add product to wishlist",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Ticket/Apparel",
+                        "name": "category",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Product ID",
+                        "name": "productid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/admin/addapparel": {
             "post": {
                 "description": "Adding new product of category apparel in database",
@@ -407,6 +519,159 @@
                 }
             }
         },
+        "/appareldetails/{apparelid}": {
+            "get": {
+                "description": "Showing details of a single product and option to adding cart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "Details of a Apparel",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Apparel ID",
+                        "name": "apparelid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Apparel Details",
+                        "schema": {
+                            "$ref": "#/definitions/entity.ApparelDetails"
+                        }
+                    }
+                }
+            }
+        },
+        "/apparels": {
+            "get": {
+                "description": "Showing the available Apparels in the site",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "Apparel List",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page no",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "limit no",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort by Category",
+                        "name": "sort",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Apparel List",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Apparel"
+                        }
+                    }
+                }
+            }
+        },
+        "/applycoupon/{code}": {
+            "post": {
+                "description": "applying coupon offer for user cart amount",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "checking coupon availability and adding offer amount",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "coupon code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "total amount",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/coupons": {
+            "get": {
+                "description": "showing the available coupons and eligibility",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "checking coupon availability",
+                "responses": {
+                    "200": {
+                        "description": "Available coupons",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Coupon"
+                        }
+                    }
+                }
+            }
+        },
+        "/home": {
+            "get": {
+                "description": "User home with the next navigations",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "User Home",
+                "responses": {
+                    "200": {
+                        "description": "Success message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/logout": {
             "post": {
                 "description": "Deleting cookie from the browser while logout",
@@ -425,6 +690,143 @@
                         "description": "Success message",
                         "schema": {
                             "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/offer": {
+            "get": {
+                "description": "finding and showing offer for user with respect to user cart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "checking offer availability",
+                "responses": {
+                    "200": {
+                        "description": "offers",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/removefromcart/{product}/{id}": {
+            "delete": {
+                "description": "Removing product from the cart for unique and decrese quantity for existing product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "Remove Product from cart",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Product ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/removefromwishlist/{product}/{id}": {
+            "delete": {
+                "description": "Removing product from the user wishlist",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "Remove Product from wishlist",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ticket/apparel",
+                        "name": "product",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Product ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/searchapparel": {
+            "get": {
+                "description": "Showing the available apparels as per user search",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "Search Result",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page no",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "limit no",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search By Name",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Apparel Data",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Apparel"
                         }
                     }
                 }
@@ -727,9 +1129,124 @@
                     }
                 }
             }
+        },
+        "/usercart": {
+            "get": {
+                "description": "Showing user cart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "User Cart",
+                "responses": {
+                    "200": {
+                        "description": "User Cart",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Cart"
+                        }
+                    }
+                }
+            }
+        },
+        "/usercartlist": {
+            "get": {
+                "description": "Showing the products in user cart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "Cart List",
+                "responses": {
+                    "200": {
+                        "description": "Cart List",
+                        "schema": {
+                            "$ref": "#/definitions/entity.CartItem"
+                        }
+                    }
+                }
+            }
+        },
+        "/userdetails": {
+            "get": {
+                "description": "User profile with adress and user details",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Authentication"
+                ],
+                "summary": "User Details",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.User"
+                        }
+                    }
+                }
+            }
+        },
+        "/userwishlist": {
+            "get": {
+                "description": "Showing the products in user wishlist",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Shopping"
+                ],
+                "summary": "Wish List",
+                "responses": {
+                    "200": {
+                        "description": "Wishlist",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Wishlist"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "entity.Address": {
+            "type": "object",
+            "properties": {
+                "city": {
+                    "type": "string"
+                },
+                "house": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "pincode": {
+                    "type": "integer"
+                },
+                "street": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
         "entity.Admin": {
             "type": "object",
             "properties": {
@@ -811,6 +1328,23 @@
                 }
             }
         },
+        "entity.ApparelDetails": {
+            "type": "object",
+            "properties": {
+                "apparelid": {
+                    "type": "integer"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "size": {
+                    "type": "string"
+                }
+            }
+        },
         "entity.ApparelInput": {
             "type": "object",
             "properties": {
@@ -852,6 +1386,43 @@
                 },
                 "subcategory": {
                     "type": "string"
+                }
+            }
+        },
+        "entity.Cart": {
+            "type": "object",
+            "properties": {
+                "apparelquantity": {
+                    "type": "integer"
+                },
+                "offerprice": {
+                    "type": "integer"
+                },
+                "ticketquantity": {
+                    "type": "integer"
+                },
+                "totalprice": {
+                    "type": "number"
+                }
+            }
+        },
+        "entity.CartItem": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "productid": {
+                    "type": "integer"
+                },
+                "productname": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "integer"
                 }
             }
         },
@@ -962,6 +1533,23 @@
                 },
                 "wallet": {
                     "type": "integer"
+                }
+            }
+        },
+        "entity.Wishlist": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "productid": {
+                    "type": "integer"
+                },
+                "productname": {
+                    "type": "string"
                 }
             }
         }
