@@ -238,7 +238,7 @@ func (a *UserDashboardHandler) SearchApparels(c *gin.Context) {
 			SubCategory: apparel.Subcategory,
 		}
 	}
-	c.JSON(http.StatusOK, gin.H{"tickets": responseList})
+	c.JSON(http.StatusOK, gin.H{"Apparels": responseList})
 }
 
 // Add to cart  godoc
@@ -412,11 +412,11 @@ func (a *UserDashboardHandler) RemoveFromWishlist(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "str conversion failed"})
 		return
 	}
-	req := &pb.RemoveFromCartRequest{
+	req := &pb.RemoveFromWishlistRequest{
 		Userid:    int32(userId),
 		Productid: int32(Id),
 	}
-	resp, err := a.grpcClient.RemoveFromCart(context.Background(), req)
+	resp, err := a.grpcClient.RemoveFromWishlist(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

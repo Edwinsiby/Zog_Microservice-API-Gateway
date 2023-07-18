@@ -379,7 +379,8 @@ message RemoveFromCartResponse{
 }
 
 message RemoveFromWishlistRequest{
-  int32 userid = 1;
+  int32 productid = 1;
+  int32 userid = 2;
 }
 
 message RemoveFromWishlistResponse{
