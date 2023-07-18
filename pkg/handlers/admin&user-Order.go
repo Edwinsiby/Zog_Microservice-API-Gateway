@@ -3,11 +3,9 @@ package handlers
 import (
 	"context"
 	pb "gateway/pb"
-	"gateway/pkg/entity"
 	"log"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
@@ -67,40 +65,60 @@ func (o *OrderHandler) PlaceOrder(c *gin.Context) {
 		return
 	}
 	if paymentMethod == "cod" {
-		invoice, err1 := oh.OrderUsecase.ExecutePurchaseCod(userId, addressId)
-		if err1 != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err1.Error()})
-			return
-		} else {
-			c.JSON(http.StatusOK, gin.H{"massage": "Order placed successfully", "Invoice": invoice})
+		req := &pb.PlaceOrderRequest{
+			Userid:        int32(userId),
+			Addressid:     int32(addressId),
+			Paymentmethod: paymentMethod,
 		}
-
-	} else if paymentMethod == "paypal" {
-		invoice, err1 := oh.OrderUsecase.ExecutePurchasePaypal(userId, addressId)
-		if err1 != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err1.Error()})
-			return
-		} else {
-
-			c.JSON(http.StatusOK, gin.H{"massage": "Order placed successfully", "Invoice": invoice})
-		}
-
-	} else if paymentMethod == "razorpay" {
-		razorId, orderId, err1 := oh.OrderUsecase.ExecutePurchaseRazorPay(userId, addressId, c)
-		if err1 != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err1.Error()})
-			return
-		} else {
-			c.JSON(http.StatusOK, gin.H{"massage": "Complete your transaction with razorpay", "Link": "http://127.0.0.1:5500/app.html", "RazorId": razorId, "OrderId": orderId})
-		}
-
-	} else if paymentMethod == "wallet" {
-		invoice, err := oh.OrderUsecase.ExecutePurchaseWallet(userId, addressId)
+		resp, err := o.grpcClient.PlaceOrder(context.Background(), req)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		} else {
-			c.JSON(http.StatusOK, gin.H{"massage": "Order placed successfully", "Invoice": invoice})
+			c.JSON(http.StatusOK, gin.H{"massage": "Order placed successfully", "Invoice": resp})
+		}
+
+	} else if paymentMethod == "paypal" {
+		req := &pb.PlaceOrderRequest{
+			Userid:        int32(userId),
+			Addressid:     int32(addressId),
+			Paymentmethod: paymentMethod,
+		}
+		resp, err := o.grpcClient.PlaceOrder(context.Background(), req)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		} else {
+
+			c.JSON(http.StatusOK, gin.H{"massage": "Order placed successfully", "Invoice": resp})
+		}
+
+	} else if paymentMethod == "razorpay" {
+		req := &pb.PlaceOrderRequest{
+			Userid:        int32(userId),
+			Addressid:     int32(addressId),
+			Paymentmethod: paymentMethod,
+		}
+		resp, err := o.grpcClient.PlaceOrder(context.Background(), req)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		} else {
+			c.JSON(http.StatusOK, gin.H{"massage": resp})
+		}
+
+	} else if paymentMethod == "wallet" {
+		req := &pb.PlaceOrderRequest{
+			Userid:        int32(userId),
+			Addressid:     int32(addressId),
+			Paymentmethod: paymentMethod,
+		}
+		resp, err := o.grpcClient.PlaceOrder(context.Background(), req)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		} else {
+			c.JSON(http.StatusOK, gin.H{"massage": "Order placed successfully", "Invoice": resp})
 		}
 	}
 }
@@ -121,12 +139,17 @@ func (o *OrderHandler) PaymentVerification(c *gin.Context) {
 	Signature := c.Param("sign")
 	razorId := c.Param("razorid")
 	paymentId := c.Param("payid")
-	invoice, err := oh.OrderUsecase.ExecuteRazorPaymentVerification(Signature, razorId, paymentId)
+	req := &pb.PaymentVerificationRequest{
+		Signature: Signature,
+		Razorid:   razorId,
+		Paymentid: paymentId,
+	}
+	resp, err := o.grpcClient.PaymentVerification(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	} else {
-		invoice.PaymentId = paymentId
-		c.JSON(http.StatusAccepted, gin.H{"massage": "Payment successful", "invoice": invoice})
+		resp.Paymentid = paymentId
+		c.JSON(http.StatusAccepted, gin.H{"massage": "Payment successful", "invoice": resp})
 	}
 }
 
@@ -147,12 +170,15 @@ func (o *OrderHandler) CancelOrder(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "str conversion failed"})
 		return
 	}
-	err1 := oh.OrderUsecase.ExecuteCancelOrder(orderId)
-	if err1 != nil {
+	req := &pb.CancelOrderRequest{
+		Orderid: int32(orderId),
+	}
+	resp, err := o.grpcClient.CancelOrder(context.Background(), req)
+	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Order not found"})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"success": "Order canceled"})
+	c.JSON(http.StatusOK, gin.H{"success": resp})
 }
 
 // Order History   godoc
@@ -179,12 +205,17 @@ func (o *OrderHandler) OrderHistory(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid limit parameter"})
 		return
 	}
-	orderList, err := oh.OrderUsecase.ExecuteOrderHistory(userId, page, limit)
+	req := &pb.OrderHistoryRequest{
+		Userid: int32(userId),
+		Page:   int32(page),
+		Limit:  int32(limit),
+	}
+	resp, err := o.grpcClient.OrderHistory(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"Orders": orderList})
+	c.JSON(http.StatusOK, gin.H{"Orders": resp})
 }
 
 // Order return godoc
@@ -209,17 +240,18 @@ func (o *OrderHandler) OrderReturn(c *gin.Context) {
 		return
 	}
 
-	returnData := entity.Return{
-		UserId:  userId,
-		OrderId: orderId,
+	req := &pb.OrderReturnRequest{
+		Userid:  int32(userId),
+		Orderid: int32(orderId),
 		Reason:  reason,
 		Status:  "Initiated",
 	}
-	err = oh.OrderUsecase.ExecuteReturnOrder(returnData)
+	resp, err := o.grpcClient.OrderReturn(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	c.JSON(http.StatusOK, gin.H{"success": resp.Result})
 }
 
 // Order Update  godoc
@@ -241,12 +273,13 @@ func (o *OrderHandler) AdminOrderUpdate(c *gin.Context) {
 		return
 	}
 	strStatus := c.Param("status")
-	err1 := oh.OrderUsecase.ExecuteOrderUpdate(orderId, strStatus)
-	if err1 != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": err1.Error()})
+	req := &pb.AdminOrderUpdateRequest{Orderid: int32(orderId), Status: strStatus}
+	resp, err := o.grpcClient.AdminOrderUpdate(context.Background(), req)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"success": "Order Updated"})
+	c.JSON(http.StatusOK, gin.H{"success": resp.Result})
 }
 
 // Update Return    godoc
@@ -270,11 +303,13 @@ func (o *OrderHandler) AdminReturnUpdate(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "str conversion failed"})
 		return
 	}
-
 	if refund == "wallet" {
-		err = oh.OrderUsecase.ExecuteReturnUpdate(status, returnId)
+		req := &pb.AdminReturnUpdateRequest{Status: status, Refund: refund, Returnid: int32(returnId)}
+		resp, err := o.grpcClient.AdminReturnUpdate(context.Background(), req)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		} else {
+			c.JSON(http.StatusOK, gin.H{"success": resp.Result})
 		}
 	}
 }
@@ -296,12 +331,13 @@ func (o *OrderHandler) AdminRefund(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "str conversion failed"})
 		return
 	}
-	err = oh.OrderUsecase.ExecuteRefund(orderId)
+	req := &pb.AdminRefundRequest{Orderid: int32(orderId)}
+	resp, err := o.grpcClient.AdminRefund(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	} else {
-		c.JSON(http.StatusOK, gin.H{"massage": "The refund added to wallet succesfuly"})
+		c.JSON(http.StatusOK, gin.H{"massage": resp.Result})
 	}
 }
 
@@ -317,23 +353,23 @@ func (o *OrderHandler) AdminRefund(c *gin.Context) {
 //	@Success		200		body	entity.SalesReport	"report"
 //	@Router			/salesreportbydate/{start}/{end} [get]
 func (o *OrderHandler) SalesReportByDate(c *gin.Context) {
-	startDateStr := c.Param("start")
-	endDateStr := c.Param("end")
-	startDate, err := time.Parse("2-1-2006", startDateStr)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "str conversion failed"})
-		return
-	}
-	endDate, err := time.Parse("2-1-2006", endDateStr)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "str conversion failed"})
-		return
-	}
-	report, err := oh.OrderUsecase.ExecuteSalesReportByDate(startDate, endDate)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-	}
-	c.JSON(http.StatusOK, gin.H{"report": report})
+	// startDateStr := c.Param("start")
+	// endDateStr := c.Param("end")
+	// startDate, err := time.Parse("2-1-2006", startDateStr)
+	// if err != nil {
+	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "str conversion failed"})
+	// 	return
+	// }
+	// endDate, err := time.Parse("2-1-2006", endDateStr)
+	// if err != nil {
+	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "str conversion failed"})
+	// 	return
+	// }
+	// report, err := oh.OrderUsecase.ExecuteSalesReportByDate(startDate, endDate)
+	// if err != nil {
+	// 	c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	// }
+	c.JSON(http.StatusOK, gin.H{"report": "report"})
 }
 
 // Sales report by period godoc
@@ -349,11 +385,12 @@ func (o *OrderHandler) SalesReportByDate(c *gin.Context) {
 func (o *OrderHandler) SalesReportByPeriod(c *gin.Context) {
 	period := c.Param("period")
 
-	report, err := oh.OrderUsecase.ExecuteSalesReportByPeriod(period)
+	req := &pb.SalesReportByPeriodRequest{Period: period}
+	resp, err := o.grpcClient.SalesReportByPeriod(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
-	c.JSON(http.StatusOK, gin.H{"report": report})
+	c.JSON(http.StatusOK, gin.H{"report": resp})
 }
 
 // Sales report by category
@@ -370,11 +407,12 @@ func (o *OrderHandler) SalesReportByPeriod(c *gin.Context) {
 func (o *OrderHandler) SalesReportByCategory(c *gin.Context) {
 	category := c.Param("category")
 	period := c.Param("period")
-	report, err := oh.OrderUsecase.ExecuteSalesReportByCategory(category, period)
+	req := &pb.SalesReportByCategoryRequest{Category: category, Period: period}
+	resp, err := o.grpcClient.SalesReportByCategory(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
-	c.JSON(http.StatusOK, gin.H{"report": report})
+	c.JSON(http.StatusOK, gin.H{"report": resp})
 }
 
 // Sort  order by status
@@ -401,12 +439,11 @@ func (o *OrderHandler) SortOrderByStatus(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid limit parameter"})
 		return
 	}
-
-	orders, err := o.OrderUsecase.ExecuteSortedOrders(page, limit, status)
+	req := &pb.SortOrderByStatusRequest{Status: status, Page: int32(page), Limit: int32(limit)}
+	resp, err := o.grpcClient.SortOrderByStatus(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	} else {
-		c.JSON(http.StatusOK, gin.H{"Orders": orders})
+		c.JSON(http.StatusOK, gin.H{"Orders": resp})
 	}
-
 }
