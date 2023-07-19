@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"context"
+	"fmt"
 	pb "gateway/pb"
 	"gateway/pkg/entity"
 	"log"
@@ -9,6 +10,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/grpc"
 )
 
@@ -212,7 +214,10 @@ func (a *AdminDashboardHandler) CreateApparel(c *gin.Context) {
 		Category:    input.Category,
 		Subcategory: input.SubCategory,
 	}
-	resp, err := a.grpcClient.CreateApparel(context.Background(), req)
+	token, _ := c.Cookie("Authorise")
+	fmt.Println(token)
+	ctx := context.WithValue(context.Background(), "jwtToken", token)
+	resp, err := a.grpcClient.CreateApparel(ctx, req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	} else {
@@ -296,12 +301,17 @@ func (a *AdminDashboardHandler) AddCoupon(c *gin.Context) {
 	if err := c.ShouldBindJSON(&coupon); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
+	timestamp, err := ptypes.TimestampProto(coupon.ValidUntil)
+	if err != nil {
+		// Handle error if the conversion fails
+	}
 	req := &pb.AddCouponRequest{
 		Code:     coupon.Code,
 		Type:     coupon.Type,
 		Amount:   int32(coupon.Amount),
 		Limit:    int32(coupon.UsageLimit),
 		Category: coupon.Category,
+		Valid:    timestamp,
 	}
 	resp, err := a.grpcClient.AddCoupon(context.Background(), req)
 	if err != nil {

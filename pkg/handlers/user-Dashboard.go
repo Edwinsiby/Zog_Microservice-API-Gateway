@@ -9,7 +9,6 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/copier"
 	"google.golang.org/grpc"
 )
 
@@ -83,6 +82,7 @@ func (a *UserDashboardHandler) AddAddress(c *gin.Context) {
 		Street:  address.Street,
 		Pincode: int32(address.Pincode),
 		Type:    address.Type,
+		Userid:  int32(userId),
 	}
 	resp, err := a.grpcClient.AddAddress(context.Background(), req)
 	if err != nil {
@@ -127,7 +127,7 @@ func (a *UserDashboardHandler) ShowUserDetails(c *gin.Context) {
 //	@Param			limit	query		int				false	"limit no"
 //	@Param			sort	query		string			false	"Sort by Category"
 //	@Success		200		{object}	entity.Apparel	"Apparel List"
-//	@Router			/apparels [get]
+//	@Router			/products [get]
 func (a *UserDashboardHandler) Apparels(c *gin.Context) {
 	category := c.Query("sort")
 	pageStr := c.DefaultQuery("page", "1")
@@ -174,7 +174,7 @@ func (a *UserDashboardHandler) Apparels(c *gin.Context) {
 //	@Produce		json
 //	@Param			apparelid	path		string					true	"Apparel ID"
 //	@Success		200			{object}	entity.ApparelDetails	"Apparel Details"
-//	@Router			/appareldetails/{apparelid} [get]
+//	@Router			/productdetails/{apparelid} [get]
 func (a *UserDashboardHandler) ApparelDetails(c *gin.Context) {
 	id := c.Param("apparelid")
 	Id, err := strconv.Atoi(id)
@@ -251,7 +251,7 @@ func (a *UserDashboardHandler) SearchApparels(c *gin.Context) {
 //	@Param			productid	path		string	true	"Product ID"
 //	@Param			quantity	path		string	true	"Product Quantity"
 //	@Success		200			{string}	string	"Success message"
-//	@Router			/addtocart/{category}/{productid}/{quantity} [post]
+//	@Router			/addtocart/{productid}/{quantity} [post]
 func (a *UserDashboardHandler) AddToCart(c *gin.Context) {
 	userID, _ := c.Get("userID")
 	userId := userID.(int)
@@ -288,10 +288,9 @@ func (a *UserDashboardHandler) AddToCart(c *gin.Context) {
 //	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
-//	@Param			category	path		string	true	"Ticket/Apparel"
 //	@Param			productid	path		string	true	"Product ID"
 //	@Success		200			{string}	string	"Success message"
-//	@Router			/addtowishlist/{category}/{productid} [post]
+//	@Router			/addtowishlist/{productid} [post]
 func (a *UserDashboardHandler) AddToWishlist(c *gin.Context) {
 	userID, _ := c.Get("userID")
 	userId := userID.(int)
@@ -325,7 +324,6 @@ func (a *UserDashboardHandler) AddToWishlist(c *gin.Context) {
 func (a *UserDashboardHandler) Cart(c *gin.Context) {
 	userID, _ := c.Get("userID")
 	userId := userID.(int)
-	var userCartResponse entity.Cart
 	req := &pb.CartRequest{
 		Userid: int32(userId),
 	}
@@ -334,8 +332,7 @@ func (a *UserDashboardHandler) Cart(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	copier.Copy(&userCartResponse, &resp)
-	c.JSON(http.StatusOK, gin.H{"User Cart": userCartResponse})
+	c.JSON(http.StatusOK, gin.H{"User Cart": resp})
 }
 
 // Cart List    godoc
@@ -399,7 +396,6 @@ func (a *UserDashboardHandler) RemoveFromCart(c *gin.Context) {
 //	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
-//	@Param			product	path		string	true	"ticket/apparel"
 //	@Param			id		path		int		true	"Product ID"
 //	@Success		200		{string}	string	"Success message"
 //	@Router			/removefromwishlist/{product}/{id} [delete]
@@ -457,12 +453,17 @@ func (a *UserDashboardHandler) ViewWishlist(c *gin.Context) {
 //	@Success		200	{object}	entity.Coupon	"Available coupons"
 //	@Router			/coupons [get]
 func (a *UserDashboardHandler) AvailableCoupons(c *gin.Context) {
-	resp, err := a.grpcClient.AvailableCoupons(context.Background(), nil)
+	userID, _ := c.Get("userID")
+	userId := userID.(int)
+	req := &pb.AvailableCouponsRequest{
+		Userid: int32(userId),
+	}
+	resp, err := a.grpcClient.AvailableCoupons(context.Background(), req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"Available coupons are ": resp})
+	c.JSON(http.StatusOK, gin.H{"Available coupons are ": resp.Coupons})
 }
 
 // Apply Coupon  godoc

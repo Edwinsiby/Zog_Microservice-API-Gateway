@@ -50,7 +50,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/addtocart/{category}/{productid}/{quantity}": {
+        "/addtocart/{productid}/{quantity}": {
             "post": {
                 "description": "Adding product with quantity to cart with product id",
                 "consumes": [
@@ -89,7 +89,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/addtowishlist/{category}/{productid}": {
+        "/addtowishlist/{productid}": {
             "post": {
                 "description": "Adding single product to wishlist with product id",
                 "consumes": [
@@ -103,13 +103,6 @@ const docTemplate = `{
                 ],
                 "summary": "Add product to wishlist",
                 "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Ticket/Apparel",
-                        "name": "category",
-                        "in": "path",
-                        "required": true
-                    },
                     {
                         "type": "string",
                         "description": "Product ID",
@@ -531,81 +524,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/appareldetails/{apparelid}": {
-            "get": {
-                "description": "Showing details of a single product and option to adding cart",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User Dashboard"
-                ],
-                "summary": "Details of a Apparel",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Apparel ID",
-                        "name": "apparelid",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Apparel Details",
-                        "schema": {
-                            "$ref": "#/definitions/entity.ApparelDetails"
-                        }
-                    }
-                }
-            }
-        },
-        "/apparels": {
-            "get": {
-                "description": "Showing the available Apparels in the site",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User Dashboard"
-                ],
-                "summary": "Apparel List",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "page no",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "limit no",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Sort by Category",
-                        "name": "sort",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Apparel List",
-                        "schema": {
-                            "$ref": "#/definitions/entity.Apparel"
-                        }
-                    }
-                }
-            }
-        },
         "/applycoupon/{code}": {
             "post": {
                 "description": "applying coupon offer for user cart amount",
@@ -909,6 +827,81 @@ const docTemplate = `{
                 }
             }
         },
+        "/productdetails/{apparelid}": {
+            "get": {
+                "description": "Showing details of a single product and option to adding cart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Dashboard"
+                ],
+                "summary": "Details of a Apparel",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Apparel ID",
+                        "name": "apparelid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Apparel Details",
+                        "schema": {
+                            "$ref": "#/definitions/entity.ApparelDetails"
+                        }
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "description": "Showing the available Apparels in the site",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Dashboard"
+                ],
+                "summary": "Apparel List",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page no",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "limit no",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Sort by Category",
+                        "name": "sort",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Apparel List",
+                        "schema": {
+                            "$ref": "#/definitions/entity.Apparel"
+                        }
+                    }
+                }
+            }
+        },
         "/refund/{orderid}": {
             "post": {
                 "description": "Transfering the total amount of order to wallet or other methods",
@@ -987,13 +980,6 @@ const docTemplate = `{
                 ],
                 "summary": "Remove Product from wishlist",
                 "parameters": [
-                    {
-                        "type": "string",
-                        "description": "ticket/apparel",
-                        "name": "product",
-                        "in": "path",
-                        "required": true
-                    },
                     {
                         "type": "integer",
                         "description": "Product ID",

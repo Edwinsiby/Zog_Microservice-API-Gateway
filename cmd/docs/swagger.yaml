@@ -259,7 +259,7 @@ paths:
       summary: Add Address
       tags:
       - User Dashboard
-  /addtocart/{category}/{productid}/{quantity}:
+  /addtocart/{productid}/{quantity}:
     post:
       consumes:
       - application/json
@@ -285,17 +285,12 @@ paths:
       summary: Add product to cart
       tags:
       - User Dashboard
-  /addtowishlist/{category}/{productid}:
+  /addtowishlist/{productid}:
     post:
       consumes:
       - application/json
       description: Adding single product to wishlist with product id
       parameters:
-      - description: Ticket/Apparel
-        in: path
-        name: category
-        required: true
-        type: string
       - description: Product ID
         in: path
         name: productid
@@ -573,55 +568,6 @@ paths:
       summary: block/unblock user
       tags:
       - Admin Dashboard
-  /appareldetails/{apparelid}:
-    get:
-      consumes:
-      - application/json
-      description: Showing details of a single product and option to adding cart
-      parameters:
-      - description: Apparel ID
-        in: path
-        name: apparelid
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Apparel Details
-          schema:
-            $ref: '#/definitions/entity.ApparelDetails'
-      summary: Details of a Apparel
-      tags:
-      - User Dashboard
-  /apparels:
-    get:
-      consumes:
-      - application/json
-      description: Showing the available Apparels in the site
-      parameters:
-      - description: page no
-        in: query
-        name: page
-        type: integer
-      - description: limit no
-        in: query
-        name: limit
-        type: integer
-      - description: Sort by Category
-        in: query
-        name: sort
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Apparel List
-          schema:
-            $ref: '#/definitions/entity.Apparel'
-      summary: Apparel List
-      tags:
-      - User Dashboard
   /applycoupon/{code}:
     post:
       consumes:
@@ -822,6 +768,55 @@ paths:
       summary: Place Order
       tags:
       - Admin&User Order Management
+  /productdetails/{apparelid}:
+    get:
+      consumes:
+      - application/json
+      description: Showing details of a single product and option to adding cart
+      parameters:
+      - description: Apparel ID
+        in: path
+        name: apparelid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Apparel Details
+          schema:
+            $ref: '#/definitions/entity.ApparelDetails'
+      summary: Details of a Apparel
+      tags:
+      - User Dashboard
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: Showing the available Apparels in the site
+      parameters:
+      - description: page no
+        in: query
+        name: page
+        type: integer
+      - description: limit no
+        in: query
+        name: limit
+        type: integer
+      - description: Sort by Category
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Apparel List
+          schema:
+            $ref: '#/definitions/entity.Apparel'
+      summary: Apparel List
+      tags:
+      - User Dashboard
   /refund/{orderid}:
     post:
       consumes:
@@ -871,11 +866,6 @@ paths:
       - application/json
       description: Removing product from the user wishlist
       parameters:
-      - description: ticket/apparel
-        in: path
-        name: product
-        required: true
-        type: string
       - description: Product ID
         in: path
         name: id
