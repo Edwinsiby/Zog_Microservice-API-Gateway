@@ -31,7 +31,7 @@ func NewOrderHandler(cc *grpc.ClientConn) *OrderHandler {
 //	@Produce		json
 //	@Success		200			string	message
 //	@Router			/service4/healthcheck [get]
-func (o *OrderHandler) OrderIndexHandler(c *gin.Context) {
+func (o *OrderHandler) OrderHealthCheck(c *gin.Context) {
 	req := &pb.Request{
 		Data: "Mydata",
 	}

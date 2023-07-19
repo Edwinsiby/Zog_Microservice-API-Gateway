@@ -8,7 +8,7 @@ import (
 )
 
 func AdminDashboardRoutes(r *gin.Engine, handlers *handlers.AdminDashboardHandler) {
-	r.GET("/service2/healthcheck", handlers.AdminDashboardIndexHandler)
+	r.GET("/service2/healthcheck", handlers.AdminDashboardHealthCheck)
 	r.GET("/admin/usermanagement", m.AdminRetriveCookie, handlers.UserList)
 	r.GET("/admin/sortuser", m.AdminRetriveCookie, handlers.SortUserByPermission)
 	r.GET("/admin/searchuser", m.AdminRetriveCookie, handlers.SearchUser)

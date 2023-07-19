@@ -33,7 +33,7 @@ func NewAuthenticationHandler(cc *grpc.ClientConn) *AuthenticationHandler {
 //	@Produce		json
 //	@Success		200			string	message
 //	@Router			/service1/healthcheck [get]
-func (a *AuthenticationHandler) IndexHandler(c *gin.Context) {
+func (a *AuthenticationHandler) HealthCheck(c *gin.Context) {
 	req := &pb.Request{
 		Data: "Mydata",
 	}

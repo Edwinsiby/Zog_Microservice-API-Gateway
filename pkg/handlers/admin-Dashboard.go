@@ -32,7 +32,7 @@ func NewAdminDashboardHandler(cc *grpc.ClientConn) *AdminDashboardHandler {
 //	@Produce		json
 //	@Success		200			string	message
 //	@Router			/service2/healthcheck [get]
-func (a *AdminDashboardHandler) AdminDashboardIndexHandler(c *gin.Context) {
+func (a *AdminDashboardHandler) AdminDashboardHealthCheck(c *gin.Context) {
 	req := &pb.Request{
 		Data: "Mydata",
 	}

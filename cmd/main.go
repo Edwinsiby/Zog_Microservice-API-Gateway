@@ -19,11 +19,13 @@ func main() {
 	docs.SwaggerInfo.Host = "localhost:8080"
 	docs.SwaggerInfo.BasePath = ""
 	docs.SwaggerInfo.Schemes = []string{"http"}
+
 	r, err := InitializeApp()
 	if err != nil {
 		panic(err)
 	}
 	r.Run(":8080")
+
 }
 
 func initializeAuthenticationHandler(cc *grpc.ClientConn) (*handlers.AuthenticationHandler, error) {

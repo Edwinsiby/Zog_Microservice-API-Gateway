@@ -10,7 +10,7 @@ import (
 func OrderRoutes(r *gin.Engine, handlers *handlers.OrderHandler) {
 
 	// user
-	r.GET("/service4/healthcheck", handlers.OrderIndexHandler)
+	r.GET("/service4/healthcheck", handlers.OrderHealthCheck)
 	r.POST("/placeorder/:addressid/:payment", m.UserRetriveCookie, handlers.PlaceOrder)
 	r.POST("/paymentverification/:sign/:razorid/:payid", m.UserRetriveCookie, handlers.PaymentVerification)
 	r.PUT("/cancelorder/:orderid", m.UserRetriveCookie, handlers.CancelOrder)
