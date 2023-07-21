@@ -3,4 +3,4 @@ proto:
 run:
 	go run cmd/main.go
 swag:
-	swag init -g pkg/handlers/admin-Dashboard.go -o cmd/docs
+	swag init -g pkg/handlers/adminDashboard.go -o cmd/docs
