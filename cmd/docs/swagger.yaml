@@ -1,5 +1,5 @@
 definitions:
-  entity.Address:
+  models.Address:
     properties:
       city:
         type: string
@@ -14,7 +14,7 @@ definitions:
       type:
         type: string
     type: object
-  entity.Admin:
+  models.Admin:
     properties:
       active:
         type: boolean
@@ -29,7 +29,7 @@ definitions:
       role:
         type: string
     type: object
-  entity.AdminDashboard:
+  models.AdminDashboard:
     properties:
       averageordervalue:
         type: integer
@@ -52,7 +52,7 @@ definitions:
       totalusers:
         type: integer
     type: object
-  entity.Apparel:
+  models.Apparel:
     properties:
       category:
         type: string
@@ -67,7 +67,7 @@ definitions:
       subcategory:
         type: string
     type: object
-  entity.ApparelDetails:
+  models.ApparelDetails:
     properties:
       apparelid:
         type: integer
@@ -78,7 +78,7 @@ definitions:
       size:
         type: string
     type: object
-  entity.ApparelInput:
+  models.ApparelInput:
     properties:
       apparelid:
         type: integer
@@ -107,7 +107,7 @@ definitions:
       subcategory:
         type: string
     type: object
-  entity.Cart:
+  models.Cart:
     properties:
       apparelquantity:
         type: integer
@@ -118,7 +118,7 @@ definitions:
       totalprice:
         type: number
     type: object
-  entity.CartItem:
+  models.CartItem:
     properties:
       category:
         type: string
@@ -131,7 +131,7 @@ definitions:
       quantity:
         type: integer
     type: object
-  entity.Coupon:
+  models.Coupon:
     properties:
       amount:
         type: integer
@@ -146,7 +146,7 @@ definitions:
       valid_until:
         type: string
     type: object
-  entity.Login:
+  models.Login:
     properties:
       password:
         type: string
@@ -156,7 +156,7 @@ definitions:
     - password
     - phone
     type: object
-  entity.Offer:
+  models.Offer:
     properties:
       amount:
         type: integer
@@ -173,7 +173,7 @@ definitions:
       valid_until:
         type: string
     type: object
-  entity.Order:
+  models.Order:
     properties:
       adressid:
         type: integer
@@ -192,7 +192,7 @@ definitions:
       userid:
         type: integer
     type: object
-  entity.Signup:
+  models.Signup:
     properties:
       email:
         type: string
@@ -205,7 +205,7 @@ definitions:
       phone:
         type: string
     type: object
-  entity.User:
+  models.User:
     properties:
       email:
         type: string
@@ -223,7 +223,7 @@ definitions:
     - lastname
     - phone
     type: object
-  entity.Wishlist:
+  models.Wishlist:
     properties:
       category:
         type: string
@@ -248,7 +248,7 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/entity.Address'
+          $ref: '#/definitions/models.Address'
       produces:
       - application/json
       responses:
@@ -317,14 +317,14 @@ paths:
         name: admin
         required: true
         schema:
-          $ref: '#/definitions/entity.ApparelInput'
+          $ref: '#/definitions/models.ApparelInput'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.Apparel'
+            $ref: '#/definitions/models.Apparel'
       summary: Adding new product
       tags:
       - Admin Dashboard
@@ -339,7 +339,7 @@ paths:
         name: admin
         required: true
         schema:
-          $ref: '#/definitions/entity.Coupon'
+          $ref: '#/definitions/models.Coupon'
       responses:
         "200":
           description: Success masage
@@ -359,7 +359,7 @@ paths:
         name: admin
         required: true
         schema:
-          $ref: '#/definitions/entity.Offer'
+          $ref: '#/definitions/models.Offer'
       responses:
         "200":
           description: Success masage
@@ -385,7 +385,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.Apparel'
+            $ref: '#/definitions/models.Apparel'
       summary: Delete existing product from database
       tags:
       - Admin Dashboard
@@ -400,14 +400,14 @@ paths:
         name: admin
         required: true
         schema:
-          $ref: '#/definitions/entity.Apparel'
+          $ref: '#/definitions/models.Apparel'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.Apparel'
+            $ref: '#/definitions/models.Apparel'
       summary: Edit existing product data
       tags:
       - Admin Dashboard
@@ -422,7 +422,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.AdminDashboard'
+            $ref: '#/definitions/models.AdminDashboard'
       summary: Admin dashbord
       tags:
       - User&Admin Authentication
@@ -437,14 +437,14 @@ paths:
         name: admin
         required: true
         schema:
-          $ref: '#/definitions/entity.Login'
+          $ref: '#/definitions/models.Login'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.Login'
+            $ref: '#/definitions/models.Login'
       summary: Admin Login with password
       tags:
       - User&Admin Authentication
@@ -459,14 +459,14 @@ paths:
         name: admin
         required: true
         schema:
-          $ref: '#/definitions/entity.Admin'
+          $ref: '#/definitions/models.Admin'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.Admin'
+            $ref: '#/definitions/models.Admin'
       summary: registering new admin
       tags:
       - User&Admin Authentication
@@ -490,7 +490,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.User'
+            $ref: '#/definitions/models.User'
       summary: Search user by id or name
       tags:
       - Admin Dashboard
@@ -519,7 +519,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.User'
+            $ref: '#/definitions/models.User'
       summary: User list by permission
       tags:
       - Admin Dashboard
@@ -543,7 +543,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.User'
+            $ref: '#/definitions/models.User'
       summary: User list
       tags:
       - Admin Dashboard
@@ -564,7 +564,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.Admin'
+            $ref: '#/definitions/models.Admin'
       summary: block/unblock user
       tags:
       - Admin Dashboard
@@ -621,7 +621,7 @@ paths:
         "200":
           description: Available coupons
           schema:
-            $ref: '#/definitions/entity.Coupon'
+            $ref: '#/definitions/models.Coupon'
       summary: checking coupon availability
       tags:
       - User Dashboard
@@ -785,7 +785,7 @@ paths:
         "200":
           description: Apparel Details
           schema:
-            $ref: '#/definitions/entity.ApparelDetails'
+            $ref: '#/definitions/models.ApparelDetails'
       summary: Details of a Apparel
       tags:
       - User Dashboard
@@ -813,7 +813,7 @@ paths:
         "200":
           description: Apparel List
           schema:
-            $ref: '#/definitions/entity.Apparel'
+            $ref: '#/definitions/models.Apparel'
       summary: Apparel List
       tags:
       - User Dashboard
@@ -978,7 +978,7 @@ paths:
         "200":
           description: Apparel Data
           schema:
-            $ref: '#/definitions/entity.Apparel'
+            $ref: '#/definitions/models.Apparel'
       summary: Search Result
       tags:
       - User Dashboard
@@ -1059,7 +1059,7 @@ paths:
         "200":
           description: sorted orders
           schema:
-            $ref: '#/definitions/entity.Order'
+            $ref: '#/definitions/models.Order'
       summary: Sorting orders by order status
       tags:
       - Admin&User Order Management
@@ -1137,7 +1137,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.Login'
+            $ref: '#/definitions/models.Login'
       summary: Login
       tags:
       - User&Admin Authentication
@@ -1163,7 +1163,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.Login'
+            $ref: '#/definitions/models.Login'
       summary: Login
       tags:
       - User&Admin Authentication
@@ -1197,7 +1197,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.Login'
+            $ref: '#/definitions/models.Login'
       summary: Otp Validation
       tags:
       - User&Admin Authentication
@@ -1212,14 +1212,14 @@ paths:
         name: userInput
         required: true
         schema:
-          $ref: '#/definitions/entity.Signup'
+          $ref: '#/definitions/models.Signup'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.Signup'
+            $ref: '#/definitions/models.Signup'
       summary: signup
       tags:
       - User&Admin Authentication
@@ -1260,14 +1260,14 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/entity.Signup'
+          $ref: '#/definitions/models.Signup'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.User'
+            $ref: '#/definitions/models.User'
       summary: signup with opt validation
       tags:
       - User&Admin Authentication
@@ -1282,7 +1282,7 @@ paths:
         "200":
           description: User Cart
           schema:
-            $ref: '#/definitions/entity.Cart'
+            $ref: '#/definitions/models.Cart'
       summary: User Cart
       tags:
       - User Dashboard
@@ -1297,7 +1297,7 @@ paths:
         "200":
           description: Cart List
           schema:
-            $ref: '#/definitions/entity.CartItem'
+            $ref: '#/definitions/models.CartItem'
       summary: Cart List
       tags:
       - User Dashboard
@@ -1312,7 +1312,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/entity.User'
+            $ref: '#/definitions/models.User'
       summary: User Details
       tags:
       - User Dashboard
@@ -1327,7 +1327,7 @@ paths:
         "200":
           description: Wishlist
           schema:
-            $ref: '#/definitions/entity.Wishlist'
+            $ref: '#/definitions/models.Wishlist'
       summary: Wish List
       tags:
       - User Dashboard

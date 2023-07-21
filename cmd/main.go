@@ -1,9 +1,9 @@
 package main
 
 import (
-	"gateway/cmd/docs"
 	"gateway/pkg/handlers"
 	"gateway/pkg/routes"
+	"gateway/pkg/utils"
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
@@ -12,14 +12,7 @@ import (
 )
 
 func main() {
-
-	docs.SwaggerInfo.Title = "Zog_festiv"
-	docs.SwaggerInfo.Description = "Yo Yo Yo 148 3 to the 3 to the 6 to the 9 "
-	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = "localhost:8080"
-	docs.SwaggerInfo.BasePath = ""
-	docs.SwaggerInfo.Schemes = []string{"http"}
-
+	utils.NewSwaggerInfo("Zog_festiv", "Yo Yo Yo 148 3 to the 3 to the 6 to the 9", "1.0", "localhost:8080")
 	r, err := InitializeApp()
 	if err != nil {
 		panic(err)

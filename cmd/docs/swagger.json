@@ -24,7 +24,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/entity.Address"
+                            "$ref": "#/definitions/models.Address"
                         }
                     }
                 ],
@@ -129,7 +129,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/entity.ApparelInput"
+                            "$ref": "#/definitions/models.ApparelInput"
                         }
                     }
                 ],
@@ -137,7 +137,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.Apparel"
+                            "$ref": "#/definitions/models.Apparel"
                         }
                     }
                 }
@@ -160,7 +160,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/entity.Coupon"
+                            "$ref": "#/definitions/models.Coupon"
                         }
                     }
                 ],
@@ -191,7 +191,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/entity.Offer"
+                            "$ref": "#/definitions/models.Offer"
                         }
                     }
                 ],
@@ -231,7 +231,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.Apparel"
+                            "$ref": "#/definitions/models.Apparel"
                         }
                     }
                 }
@@ -257,7 +257,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/entity.Apparel"
+                            "$ref": "#/definitions/models.Apparel"
                         }
                     }
                 ],
@@ -265,7 +265,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.Apparel"
+                            "$ref": "#/definitions/models.Apparel"
                         }
                     }
                 }
@@ -288,7 +288,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.AdminDashboard"
+                            "$ref": "#/definitions/models.AdminDashboard"
                         }
                     }
                 }
@@ -314,7 +314,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/entity.Login"
+                            "$ref": "#/definitions/models.Login"
                         }
                     }
                 ],
@@ -322,7 +322,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.Login"
+                            "$ref": "#/definitions/models.Login"
                         }
                     }
                 }
@@ -348,7 +348,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/entity.Admin"
+                            "$ref": "#/definitions/models.Admin"
                         }
                     }
                 ],
@@ -356,7 +356,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.Admin"
+                            "$ref": "#/definitions/models.Admin"
                         }
                     }
                 }
@@ -393,7 +393,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.User"
+                            "$ref": "#/definitions/models.User"
                         }
                     }
                 }
@@ -437,7 +437,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.User"
+                            "$ref": "#/definitions/models.User"
                         }
                     }
                 }
@@ -474,7 +474,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.User"
+                            "$ref": "#/definitions/models.User"
                         }
                     }
                 }
@@ -506,7 +506,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.Admin"
+                            "$ref": "#/definitions/models.Admin"
                         }
                     }
                 }
@@ -593,7 +593,7 @@
                     "200": {
                         "description": "Available coupons",
                         "schema": {
-                            "$ref": "#/definitions/entity.Coupon"
+                            "$ref": "#/definitions/models.Coupon"
                         }
                     }
                 }
@@ -841,7 +841,7 @@
                     "200": {
                         "description": "Apparel Details",
                         "schema": {
-                            "$ref": "#/definitions/entity.ApparelDetails"
+                            "$ref": "#/definitions/models.ApparelDetails"
                         }
                     }
                 }
@@ -884,7 +884,7 @@
                     "200": {
                         "description": "Apparel List",
                         "schema": {
-                            "$ref": "#/definitions/entity.Apparel"
+                            "$ref": "#/definitions/models.Apparel"
                         }
                     }
                 }
@@ -1133,7 +1133,7 @@
                     "200": {
                         "description": "Apparel Data",
                         "schema": {
-                            "$ref": "#/definitions/entity.Apparel"
+                            "$ref": "#/definitions/models.Apparel"
                         }
                     }
                 }
@@ -1257,7 +1257,7 @@
                     "200": {
                         "description": "sorted orders",
                         "schema": {
-                            "$ref": "#/definitions/entity.Order"
+                            "$ref": "#/definitions/models.Order"
                         }
                     }
                 }
@@ -1374,7 +1374,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.Login"
+                            "$ref": "#/definitions/models.Login"
                         }
                     }
                 }
@@ -1413,7 +1413,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.Login"
+                            "$ref": "#/definitions/models.Login"
                         }
                     }
                 }
@@ -1464,7 +1464,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.Login"
+                            "$ref": "#/definitions/models.Login"
                         }
                     }
                 }
@@ -1490,7 +1490,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/entity.Signup"
+                            "$ref": "#/definitions/models.Signup"
                         }
                     }
                 ],
@@ -1498,7 +1498,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.Signup"
+                            "$ref": "#/definitions/models.Signup"
                         }
                     }
                 }
@@ -1563,7 +1563,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/entity.Signup"
+                            "$ref": "#/definitions/models.Signup"
                         }
                     }
                 ],
@@ -1571,7 +1571,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.User"
+                            "$ref": "#/definitions/models.User"
                         }
                     }
                 }
@@ -1594,7 +1594,7 @@
                     "200": {
                         "description": "User Cart",
                         "schema": {
-                            "$ref": "#/definitions/entity.Cart"
+                            "$ref": "#/definitions/models.Cart"
                         }
                     }
                 }
@@ -1617,7 +1617,7 @@
                     "200": {
                         "description": "Cart List",
                         "schema": {
-                            "$ref": "#/definitions/entity.CartItem"
+                            "$ref": "#/definitions/models.CartItem"
                         }
                     }
                 }
@@ -1640,7 +1640,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/entity.User"
+                            "$ref": "#/definitions/models.User"
                         }
                     }
                 }
@@ -1663,7 +1663,7 @@
                     "200": {
                         "description": "Wishlist",
                         "schema": {
-                            "$ref": "#/definitions/entity.Wishlist"
+                            "$ref": "#/definitions/models.Wishlist"
                         }
                     }
                 }
@@ -1671,7 +1671,7 @@
         }
     },
     "definitions": {
-        "entity.Address": {
+        "models.Address": {
             "type": "object",
             "properties": {
                 "city": {
@@ -1694,7 +1694,7 @@
                 }
             }
         },
-        "entity.Admin": {
+        "models.Admin": {
             "type": "object",
             "properties": {
                 "active": {
@@ -1717,7 +1717,7 @@
                 }
             }
         },
-        "entity.AdminDashboard": {
+        "models.AdminDashboard": {
             "type": "object",
             "properties": {
                 "averageordervalue": {
@@ -1752,7 +1752,7 @@
                 }
             }
         },
-        "entity.Apparel": {
+        "models.Apparel": {
             "type": "object",
             "properties": {
                 "category": {
@@ -1775,7 +1775,7 @@
                 }
             }
         },
-        "entity.ApparelDetails": {
+        "models.ApparelDetails": {
             "type": "object",
             "properties": {
                 "apparelid": {
@@ -1792,7 +1792,7 @@
                 }
             }
         },
-        "entity.ApparelInput": {
+        "models.ApparelInput": {
             "type": "object",
             "properties": {
                 "apparelid": {
@@ -1836,7 +1836,7 @@
                 }
             }
         },
-        "entity.Cart": {
+        "models.Cart": {
             "type": "object",
             "properties": {
                 "apparelquantity": {
@@ -1853,7 +1853,7 @@
                 }
             }
         },
-        "entity.CartItem": {
+        "models.CartItem": {
             "type": "object",
             "properties": {
                 "category": {
@@ -1873,7 +1873,7 @@
                 }
             }
         },
-        "entity.Coupon": {
+        "models.Coupon": {
             "type": "object",
             "properties": {
                 "amount": {
@@ -1896,7 +1896,7 @@
                 }
             }
         },
-        "entity.Login": {
+        "models.Login": {
             "type": "object",
             "required": [
                 "password",
@@ -1911,7 +1911,7 @@
                 }
             }
         },
-        "entity.Offer": {
+        "models.Offer": {
             "type": "object",
             "properties": {
                 "amount": {
@@ -1937,7 +1937,7 @@
                 }
             }
         },
-        "entity.Order": {
+        "models.Order": {
             "type": "object",
             "properties": {
                 "adressid": {
@@ -1966,7 +1966,7 @@
                 }
             }
         },
-        "entity.Signup": {
+        "models.Signup": {
             "type": "object",
             "properties": {
                 "email": {
@@ -1986,7 +1986,7 @@
                 }
             }
         },
-        "entity.User": {
+        "models.User": {
             "type": "object",
             "required": [
                 "email",
@@ -2012,7 +2012,7 @@
                 }
             }
         },
-        "entity.Wishlist": {
+        "models.Wishlist": {
             "type": "object",
             "properties": {
                 "category": {

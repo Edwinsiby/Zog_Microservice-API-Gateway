@@ -350,7 +350,7 @@ func (o *OrderHandler) AdminRefund(c *gin.Context) {
 //	@Produce		json
 //	@Param			start	path	string				true	"start date D-M-Y"
 //	@Param			end		path	string				true	"end date D-M-Y"
-//	@Success		200		body	entity.SalesReport	"report"
+//	@Success		200		body	models.SalesReport	"report"
 //	@Router			/salesreportbydate/{start}/{end} [get]
 func (o *OrderHandler) SalesReportByDate(c *gin.Context) {
 	// startDateStr := c.Param("start")
@@ -402,7 +402,7 @@ func (o *OrderHandler) SalesReportByPeriod(c *gin.Context) {
 //	@Produce		json
 //	@Param			category	path	string				true	"Category"
 //	@Param			period		path	string				true	"period"
-//	@Success		200			body	entity.SalesReport	"report"
+//	@Success		200			body	models.SalesReport	"report"
 //	@Router			/salesreportbycategory/{category}/{period} [get]
 func (o *OrderHandler) SalesReportByCategory(c *gin.Context) {
 	category := c.Param("category")
@@ -423,7 +423,7 @@ func (o *OrderHandler) SalesReportByCategory(c *gin.Context) {
 //	@Accept			multipart/form-data
 //	@Produce		json
 //	@Param			status	formData	string			true	"Status"
-//	@Success		200		{object}	entity.Order	"sorted orders"
+//	@Success		200		{object}	models.Order	"sorted orders"
 //	@Router			/sortorders [post]
 func (o *OrderHandler) SortOrderByStatus(c *gin.Context) {
 	status := c.PostForm("status")
