@@ -7,7 +7,7 @@ require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/golang/protobuf v1.5.3
 	github.com/jinzhu/copier v0.3.5
-	github.com/robfig/cron v1.2.0
+	github.com/robfig/cron/v3 v3.0.0
 	github.com/spf13/viper v1.16.0
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.0
