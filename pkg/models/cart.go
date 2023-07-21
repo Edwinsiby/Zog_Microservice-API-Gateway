@@ -1,9 +1,6 @@
-package entity
-
-import "gorm.io/gorm"
+package models
 
 type Cart struct {
-	gorm.Model      `json:"-"`
 	UserId          int     `json:"-"`
 	ApparelQuantity int     `json:"apparelquantity"`
 	TicketQuantity  int     `json:"ticketquantity"`
@@ -12,7 +9,6 @@ type Cart struct {
 }
 
 type CartItem struct {
-	gorm.Model  `json:"-"`
 	CartId      int     `json:"-"`
 	Category    string  `json:"category"`
 	ProductId   int     `json:"productid"`
@@ -22,7 +18,6 @@ type CartItem struct {
 }
 
 type Wishlist struct {
-	gorm.Model  `json:"-"`
 	UserId      int     `json:"-"`
 	Category    string  `json:"category"`
 	ProductId   int     `json:"productid"`

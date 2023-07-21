@@ -1,8 +1,4 @@
-package entity
-
-import (
-	"gorm.io/gorm"
-)
+package models
 
 type EditUser struct {
 	FirstName string `json:"firstname" bson:"firstname" binding:"required"`
@@ -19,7 +15,6 @@ type Signup struct {
 }
 
 type User struct {
-	gorm.Model `json:"-"`
 	ID         int    `gorm:"primarykey" bson:"_id,omitempty" json:"-"`
 	FirstName  string `json:"firstname" bson:"firstname" binding:"required"`
 	LastName   string `json:"lastname" bson:"lastname" binding:"required"`
@@ -31,14 +26,13 @@ type User struct {
 }
 
 type Address struct {
-	gorm.Model `json:"-"`
-	ID         int    `gorm:"primarykey" json:"id"`
-	UserId     int    `json:"-"`
-	House      string `json:"house"`
-	Street     string `json:"street"`
-	City       string `json:"city"`
-	Pincode    int    `json:"pincode"`
-	Type       string `json:"type"`
+	ID      int    `gorm:"primarykey" json:"id"`
+	UserId  int    `json:"-"`
+	House   string `json:"house"`
+	Street  string `json:"street"`
+	City    string `json:"city"`
+	Pincode int    `json:"pincode"`
+	Type    string `json:"type"`
 }
 
 type Login struct {
@@ -47,7 +41,6 @@ type Login struct {
 }
 
 type OtpKey struct {
-	gorm.Model
 	Key   string `json:"key"`
 	Phone string `json:"phone"`
 }

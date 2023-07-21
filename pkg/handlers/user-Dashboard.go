@@ -3,7 +3,7 @@ package handlers
 import (
 	"context"
 	pb "gateway/pb"
-	"gateway/pkg/entity"
+	"gateway/pkg/models"
 	"log"
 	"net/http"
 	"strconv"
@@ -64,13 +64,13 @@ func (a *UserDashboardHandler) Home(c *gin.Context) {
 //	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
-//	@Param			user	body		entity.Address	true	"User Address"
+//	@Param			user	body		models.Address	true	"User Address"
 //	@Success		200		{string}	string			"Success message"
 //	@Router			/addaddress [post]
 func (a *UserDashboardHandler) AddAddress(c *gin.Context) {
 	userID, _ := c.Get("userID")
 	userId := userID.(int)
-	var address entity.Address
+	var address models.Address
 	if err := c.ShouldBindJSON(&address); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -100,7 +100,7 @@ func (a *UserDashboardHandler) AddAddress(c *gin.Context) {
 //	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
-//	@Success		200	{object}	entity.User
+//	@Success		200	{object}	models.User
 //	@Router			/userdetails [get]
 func (a *UserDashboardHandler) ShowUserDetails(c *gin.Context) {
 	userID, _ := c.Get("userID")
@@ -126,7 +126,7 @@ func (a *UserDashboardHandler) ShowUserDetails(c *gin.Context) {
 //	@Param			page	query		int				false	"page no"
 //	@Param			limit	query		int				false	"limit no"
 //	@Param			sort	query		string			false	"Sort by Category"
-//	@Success		200		{object}	entity.Apparel	"Apparel List"
+//	@Success		200		{object}	models.Apparel	"Apparel List"
 //	@Router			/products [get]
 func (a *UserDashboardHandler) Apparels(c *gin.Context) {
 	category := c.Query("sort")
@@ -152,9 +152,9 @@ func (a *UserDashboardHandler) Apparels(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Apparel list not found"})
 		return
 	}
-	responseList := make([]entity.Apparel, len(resp.Apparels))
+	responseList := make([]models.Apparel, len(resp.Apparels))
 	for i, apparel := range resp.Apparels {
-		responseList[i] = entity.Apparel{
+		responseList[i] = models.Apparel{
 			ID:          int(apparel.Id),
 			Name:        apparel.Name,
 			Price:       int(apparel.Price),
@@ -173,7 +173,7 @@ func (a *UserDashboardHandler) Apparels(c *gin.Context) {
 //	@Accept			json
 //	@Produce		json
 //	@Param			apparelid	path		string					true	"Apparel ID"
-//	@Success		200			{object}	entity.ApparelDetails	"Apparel Details"
+//	@Success		200			{object}	models.ApparelDetails	"Apparel Details"
 //	@Router			/productdetails/{apparelid} [get]
 func (a *UserDashboardHandler) ApparelDetails(c *gin.Context) {
 	id := c.Param("apparelid")
@@ -202,7 +202,7 @@ func (a *UserDashboardHandler) ApparelDetails(c *gin.Context) {
 //	@Param			page	query		int				false	"page no"
 //	@Param			limit	query		int				false	"limit no"
 //	@Param			search	query		string			false	"Search By Name"
-//	@Success		200		{object}	entity.Apparel	"Apparel Data"
+//	@Success		200		{object}	models.Apparel	"Apparel Data"
 //	@Router			/searchapparel [get]
 func (a *UserDashboardHandler) SearchApparels(c *gin.Context) {
 	pageStr := c.DefaultQuery("page", "1")
@@ -228,9 +228,9 @@ func (a *UserDashboardHandler) SearchApparels(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Apparel list not found"})
 		return
 	}
-	responseList := make([]entity.Apparel, len(resp.Apparels))
+	responseList := make([]models.Apparel, len(resp.Apparels))
 	for i, apparel := range resp.Apparels {
-		responseList[i] = entity.Apparel{
+		responseList[i] = models.Apparel{
 			ID:          int(apparel.Id),
 			Name:        apparel.Name,
 			Price:       int(apparel.Price),
@@ -319,7 +319,7 @@ func (a *UserDashboardHandler) AddToWishlist(c *gin.Context) {
 //	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
-//	@Success		200	{object}	entity.Cart	"User Cart"
+//	@Success		200	{object}	models.Cart	"User Cart"
 //	@Router			/usercart [get]
 func (a *UserDashboardHandler) Cart(c *gin.Context) {
 	userID, _ := c.Get("userID")
@@ -342,7 +342,7 @@ func (a *UserDashboardHandler) Cart(c *gin.Context) {
 //	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
-//	@Success		200	{object}	entity.CartItem	"Cart List"
+//	@Success		200	{object}	models.CartItem	"Cart List"
 //	@Router			/usercartlist [get]
 func (a *UserDashboardHandler) CartList(c *gin.Context) {
 	userID, _ := c.Get("userID")
@@ -427,7 +427,7 @@ func (a *UserDashboardHandler) RemoveFromWishlist(c *gin.Context) {
 //	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
-//	@Success		200	{object}	entity.Wishlist	"Wishlist"
+//	@Success		200	{object}	models.Wishlist	"Wishlist"
 //	@Router			/userwishlist [get]
 func (a *UserDashboardHandler) ViewWishlist(c *gin.Context) {
 	userID, _ := c.Get("userID")
@@ -450,7 +450,7 @@ func (a *UserDashboardHandler) ViewWishlist(c *gin.Context) {
 //	@Tags			User Dashboard
 //	@Accept			json
 //	@Produce		json
-//	@Success		200	{object}	entity.Coupon	"Available coupons"
+//	@Success		200	{object}	models.Coupon	"Available coupons"
 //	@Router			/coupons [get]
 func (a *UserDashboardHandler) AvailableCoupons(c *gin.Context) {
 	userID, _ := c.Get("userID")

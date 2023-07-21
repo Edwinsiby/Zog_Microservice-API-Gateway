@@ -1,11 +1,6 @@
-package entity
-
-import (
-	"gorm.io/gorm"
-)
+package models
 
 type Order struct {
-	gorm.Model    `json:"-"`
 	ID            int     `gorm:"primarykey" json:"id"`
 	UserID        int     `json:"userid"`
 	AddressId     int     `json:"adressid"`
@@ -17,16 +12,14 @@ type Order struct {
 }
 
 type OrderItem struct {
-	gorm.Model `json:"-"`
-	OrderID    int     `json:"order_id"`
-	ProductID  int     `json:"product_id"`
-	Category   string  `json:"category"`
-	Quantity   int     `json:"quantity"`
-	Price      float64 `json:"price"`
+	OrderID   int     `json:"order_id"`
+	ProductID int     `json:"product_id"`
+	Category  string  `json:"category"`
+	Quantity  int     `json:"quantity"`
+	Price     float64 `json:"price"`
 }
 
 type Return struct {
-	gorm.Model `json:"-"`
 	OrderId    int    `json:"orderid"`
 	UserId     int    `json:"userid"`
 	Reason     string `json:"reason"`
@@ -36,7 +29,6 @@ type Return struct {
 }
 
 type Invoice struct {
-	gorm.Model  `json:"-"`
 	OrderId     int     `json:"orderid"`
 	UserId      int     `json:"userid"`
 	AddressType string  `json:"addresstype"`

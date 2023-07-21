@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	pb "gateway/pb"
-	"gateway/pkg/entity"
+	"gateway/pkg/models"
 	"log"
 	"net/http"
 	"strconv"
@@ -56,7 +56,7 @@ func (a *AdminDashboardHandler) AdminDashboardHealthCheck(c *gin.Context) {
 //	@Produce		json
 //	@Param			page	query		string	false	"page no"
 //	@Param			limit	query		string	false	"limit no"
-//	@Success		200		{object}	entity.User
+//	@Success		200		{object}	models.User
 //	@Router			/admin/usermanagement [get]
 func (a *AdminDashboardHandler) UserList(c *gin.Context) {
 	pageStr := c.DefaultQuery("page", "1")
@@ -93,7 +93,7 @@ func (a *AdminDashboardHandler) UserList(c *gin.Context) {
 //	@Param			page		query		string	false	"page no"
 //	@Param			limit		query		string	false	"limit no"
 //	@Param			permission	query		string	true	"true/false"
-//	@Success		200			{object}	entity.User
+//	@Success		200			{object}	models.User
 //	@Router			/admin/sortuser [get]
 func (a *AdminDashboardHandler) SortUserByPermission(c *gin.Context) {
 	pageStr := c.DefaultQuery("page", "1")
@@ -131,7 +131,7 @@ func (a *AdminDashboardHandler) SortUserByPermission(c *gin.Context) {
 //	@Produce		json
 //	@Param			name	query		string	false	"User Name"
 //	@Param			id		query		string	false	"User Id"
-//	@Success		200		{object}	entity.User
+//	@Success		200		{object}	models.User
 //	@Router			/admin/searchuser [get]
 func (a *AdminDashboardHandler) SearchUser(c *gin.Context) {
 	name := c.DefaultQuery("name", " ")
@@ -174,7 +174,7 @@ func (a *AdminDashboardHandler) SearchUser(c *gin.Context) {
 //	@Accept			json
 //	@Produce		json
 //	@param			id	path		string	true	"User ID"
-//	@Success		200	{object}	entity.Admin
+//	@Success		200	{object}	models.Admin
 //	@Router			/admin/userpermission/{id} [post]
 func (a *AdminDashboardHandler) TogglePermission(c *gin.Context) {
 	id := c.Param("id")
@@ -199,11 +199,11 @@ func (a *AdminDashboardHandler) TogglePermission(c *gin.Context) {
 //	@Tags			Admin Dashboard
 //	@Accept			json
 //	@Produce		json
-//	@Param			admin	body		entity.ApparelInput	true	"Apparel Data"
-//	@Success		200		{object}	entity.Apparel
+//	@Param			admin	body		models.ApparelInput	true	"Apparel Data"
+//	@Success		200		{object}	models.Apparel
 //	@Router			/admin/addapparel [post]
 func (a *AdminDashboardHandler) CreateApparel(c *gin.Context) {
-	var input entity.ApparelInput
+	var input models.ApparelInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
@@ -232,11 +232,11 @@ func (a *AdminDashboardHandler) CreateApparel(c *gin.Context) {
 //	@Tags			Admin Dashboard
 //	@Accept			json
 //	@Produce		json
-//	@Param			admin	body		entity.Apparel	true	"Apparel Data"
-//	@Success		200		{object}	entity.Apparel
+//	@Param			admin	body		models.Apparel	true	"Apparel Data"
+//	@Success		200		{object}	models.Apparel
 //	@Router			/admin/editapparel/{id} [put]
 func (a *AdminDashboardHandler) EditApparel(c *gin.Context) {
-	var input entity.Apparel
+	var input models.Apparel
 	id := c.Param("id")
 	Id, err := strconv.Atoi(id)
 	if err != nil {
@@ -268,7 +268,7 @@ func (a *AdminDashboardHandler) EditApparel(c *gin.Context) {
 //	@Accept			json
 //	@Produce		json
 //	@param			ProductId	query		int	true	"product id"
-//	@Success		200			{object}	entity.Apparel
+//	@Success		200			{object}	models.Apparel
 //	@Router			/admin/deleteapparel/{id} [delete]
 func (a *AdminDashboardHandler) DeleteApparel(c *gin.Context) {
 	id := c.Param("id")
@@ -293,11 +293,11 @@ func (a *AdminDashboardHandler) DeleteApparel(c *gin.Context) {
 //	@Description	Addig coupon for users, with a unique code
 //	@Tags			Admin Dashboard
 //	@Accept			json
-//	@Param			admin	body		entity.Coupon	true	"coupon"
+//	@Param			admin	body		models.Coupon	true	"coupon"
 //	@Success		200		{string}	string			"Success masage"
 //	@Router			/admin/addcoupon  [post]
 func (a *AdminDashboardHandler) AddCoupon(c *gin.Context) {
-	var coupon entity.Coupon
+	var coupon models.Coupon
 	if err := c.ShouldBindJSON(&coupon); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
@@ -327,11 +327,11 @@ func (a *AdminDashboardHandler) AddCoupon(c *gin.Context) {
 //	@Description	Addig coupon for users, with a unique code
 //	@Tags			Admin Dashboard
 //	@Accept			json
-//	@Param			admin	body		entity.Offer	true	"offer"
+//	@Param			admin	body		models.Offer	true	"offer"
 //	@Success		200		{string}	string			"Success masage"
 //	@Router			/admin/addoffer  [post]
 func (a *AdminDashboardHandler) AddOffer(c *gin.Context) {
-	var offer entity.Offer
+	var offer models.Offer
 	if err := c.ShouldBindJSON(&offer); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}

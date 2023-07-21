@@ -3,8 +3,8 @@ package handlers
 import (
 	"context"
 	pb "gateway/pb"
-	"gateway/pkg/entity"
 	"gateway/pkg/middleware"
+	"gateway/pkg/models"
 	"log"
 	"net/http"
 
@@ -53,11 +53,11 @@ func (a *AuthenticationHandler) HealthCheck(c *gin.Context) {
 //	@Tags			User&Admin Authentication
 //	@Accept			json
 //	@Produce		json
-//	@Param			userInput	body		entity.Signup	true	"User Data"
-//	@Success		200			{object}	entity.Signup
+//	@Param			userInput	body		models.Signup	true	"User Data"
+//	@Success		200			{object}	models.Signup
 //	@Router			/user/signup [post]
 func (a *AuthenticationHandler) UserSignup(c *gin.Context) {
-	var userInput entity.Signup
+	var userInput models.Signup
 	if err := c.ShouldBindJSON(&userInput); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -85,11 +85,11 @@ func (a *AuthenticationHandler) UserSignup(c *gin.Context) {
 //	@Tags			User&Admin Authentication
 //	@Accept			json
 //	@Produce		json
-//	@Param			user	body		entity.Signup	true	"User Data"
-//	@Success		200		{object}	entity.User
+//	@Param			user	body		models.Signup	true	"User Data"
+//	@Success		200		{object}	models.User
 //	@Router			/user/signupwithotp [post]
 func (a *AuthenticationHandler) SignupWithOtp(c *gin.Context) {
-	var userInput entity.Signup
+	var userInput models.Signup
 	if err := c.ShouldBindJSON(&userInput); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -140,7 +140,7 @@ func (a *AuthenticationHandler) SignupOtpValidation(c *gin.Context) {
 //	@Accept			multipart/form-data
 //	@Produce		json
 //	@Param			phone	formData	string	true	"Phone No"
-//	@Success		200		{object}	entity.Login
+//	@Success		200		{object}	models.Login
 //	@Router			/user/loginwithotp [post]
 func (a *AuthenticationHandler) LoginWithOtp(c *gin.Context) {
 	phone := c.PostForm("phone")
@@ -167,7 +167,7 @@ func (a *AuthenticationHandler) LoginWithOtp(c *gin.Context) {
 //	@Param			key		formData	string	true	"Key"
 //	@Param			phone	formData	string	false	"phone"
 //	@Param			resend	formData	string	false	"resend"
-//	@Success		200		{object}	entity.Login
+//	@Success		200		{object}	models.Login
 //	@Router			/user/otpvalidation [post]
 func (a *AuthenticationHandler) LoginOtpValidation(c *gin.Context) {
 	otp := c.PostForm("otp")
@@ -195,7 +195,7 @@ func (a *AuthenticationHandler) LoginOtpValidation(c *gin.Context) {
 //	@Produce		json
 //	@Param			phone		formData	string	true	"Phone No"
 //	@Param			password	formData	string	true	"Password"
-//	@Success		200			{object}	entity.Login
+//	@Success		200			{object}	models.Login
 //	@Router			/user/loginwithpassword [post]
 func (a *AuthenticationHandler) LoginWithPassword(c *gin.Context) {
 	phone := c.PostForm("phone")
@@ -221,11 +221,11 @@ func (a *AuthenticationHandler) LoginWithPassword(c *gin.Context) {
 //	@Tags			User&Admin Authentication
 //	@Accept			json
 //	@Produce		json
-//	@Param			admin	body		entity.Admin	true	"Admin Data"
-//	@Success		200		{object}	entity.Admin
+//	@Param			admin	body		models.Admin	true	"Admin Data"
+//	@Success		200		{object}	models.Admin
 //	@Router			/admin/registeradmin [post]
 func (a *AuthenticationHandler) RegisterAdmin(c *gin.Context) {
-	var admin entity.Admin
+	var admin models.Admin
 	if err := c.ShouldBindJSON(&admin); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -254,8 +254,8 @@ func (a *AuthenticationHandler) RegisterAdmin(c *gin.Context) {
 //	@Tags			User&Admin Authentication
 //	@Accept			json
 //	@Produce		json
-//	@Param			admin	body		entity.Login	true	"Admin Data"
-//	@Success		200		{object}	entity.Login
+//	@Param			admin	body		models.Login	true	"Admin Data"
+//	@Success		200		{object}	models.Login
 //	@Router			/admin/loginpassword [post]
 func (a *AuthenticationHandler) AdminLoginWithPassword(c *gin.Context) {
 	var payload map[string]interface{}
@@ -286,11 +286,11 @@ func (a *AuthenticationHandler) AdminLoginWithPassword(c *gin.Context) {
 //	@Tags			User&Admin Authentication
 //	@Accept			json
 //	@Produce		json
-//	@Success		200	{object}	entity.AdminDashboard
+//	@Success		200	{object}	models.AdminDashboard
 //	@Router			/admin/home [get]
 func (a *AuthenticationHandler) AdminDashboard(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"options": "Sales Report - User Management - Product Management - Order Management"})
-	dashboardResponse := &entity.AdminDashboard{
+	dashboardResponse := &models.AdminDashboard{
 		TotalUsers:        10050,
 		NewUsers:          2000,
 		TotalProducts:     200,

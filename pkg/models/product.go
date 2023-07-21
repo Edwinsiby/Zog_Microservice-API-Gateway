@@ -1,13 +1,10 @@
-package entity
+package models
 
 import (
 	"time"
-
-	"gorm.io/gorm"
 )
 
 type Ticket struct {
-	gorm.Model  `json:"-"`
 	ID          int       `gorm:"primarykey"`
 	Name        string    `json:"name"`
 	Price       int       `json:"price"`
@@ -21,7 +18,6 @@ type Ticket struct {
 }
 
 type TicketDetails struct {
-	gorm.Model  `json:"-"`
 	TicketId    int    `json:"ticketid"`
 	Description string `json:"description"`
 	Venue       string `json:"venue"`
@@ -32,7 +28,6 @@ type TicketInput struct {
 	Inventory
 }
 type Apparel struct {
-	gorm.Model  `json:"-"`
 	ID          int    `gorm:"primarykey" json:"id"`
 	Name        string `json:"name"`
 	Price       int    `json:"price"`
@@ -44,7 +39,6 @@ type Apparel struct {
 }
 
 type ApparelDetails struct {
-	gorm.Model  `json:"-"`
 	ApparelID   uint   `json:"apparelid"`
 	Description string `json:"description"`
 	Size        string `json:"size"`
@@ -57,7 +51,6 @@ type ApparelInput struct {
 }
 
 type Inventory struct {
-	gorm.Model      `json:"-"`
 	ProductId       int
 	ProductCategory string
 	Quantity        int

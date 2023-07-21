@@ -1,15 +1,12 @@
-package entity
-
-import "gorm.io/gorm"
+package models
 
 type Admin struct {
-	gorm.Model `json:"-"`
-	AdminName  string `json:"adminname"`
-	Email      string `json:"email"`
-	Phone      string `json:"phone"`
-	Password   string `json:"password"`
-	Role       string `json:"role"`
-	Active     bool   `gorm:"not null;default true"`
+	AdminName string `json:"adminname"`
+	Email     string `json:"email"`
+	Phone     string `json:"phone"`
+	Password  string `json:"password"`
+	Role      string `json:"role"`
+	Active    bool   `gorm:"not null;default true"`
 }
 
 type AdminDashboard struct {
