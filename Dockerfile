@@ -110,15 +110,4 @@ WORKDIR /app/cmd
 RUN go mod download
 RUN go build -o main .
 CMD ["/app/cmd/main"]
-# ENV GOPATH /go
-# ENV PATH $GOPATH/bin:$PATH
-# RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 1777 "$GOPATH"
-# WORKDIR $GOPATH
-# RUN apk update && apk add --no-cache git
-# RUN mkdir /app
-# ADD . /app
-# WORKDIR /app
 
-# RUN go mod download
-# RUN go build -o main .
-# CMD ["/app/cmd/main"]
