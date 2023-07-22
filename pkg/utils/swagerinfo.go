@@ -1,17 +1,14 @@
 package utils
 
-import (
-	"gateway/cmd/docs"
-)
+import "gateway/cmd/docs"
 
-func NewSwaggerInfo(title, description, version, host string) {
-
-	docs.SwaggerInfo.Title = title
-	docs.SwaggerInfo.Description = description
-	docs.SwaggerInfo.Version = version
+func NewSwaggerInfo() {
+	info, _ := LoadConfig("./")
+	docs.SwaggerInfo.Title = info.INFO.Title
+	docs.SwaggerInfo.Description = info.INFO.Description
+	docs.SwaggerInfo.Version = info.INFO.Version
 	docs.SwaggerInfo.InfoInstanceName = "swagger"
-	docs.SwaggerInfo.Host = host
+	docs.SwaggerInfo.Host = info.INFO.Host
 	docs.SwaggerInfo.BasePath = "/"
-	docs.SwaggerInfo.Schemes = []string{"http"}
-
+	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 }
