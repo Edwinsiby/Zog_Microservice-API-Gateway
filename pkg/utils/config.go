@@ -3,13 +3,9 @@ package utils
 import "github.com/spf13/viper"
 
 type Config struct {
-	DB     string `mapstructure:"DB"`
-	DSN    string `mapstructure:"DSN"`
-	JWTKEY string `mapstructure:"JWTKEY"`
-	INFO   SwagInfo
-}
-
-type SwagInfo struct {
+	DB               string   `mapstructure:"DB"`
+	DSN              string   `mapstructure:"DSN"`
+	JWTKEY           string   `mapstructure:"JWTKEY"`
 	Version          string   `mapstructure:"VERSION"`
 	Host             string   `mapstructure:"HOST"`
 	BasePath         string   `mapstructure:"BASEPATH"`
@@ -31,5 +27,5 @@ func LoadConfig(path string) (config Config, err error) {
 		return
 	}
 	err = viper.Unmarshal(&config)
-	return Config{}, nil
+	return
 }
