@@ -1,4 +1,4 @@
-package sheduler
+package utils
 
 import (
 	"fmt"
@@ -17,5 +17,4 @@ func HealthCheckShedule() {
 	})
 	cr.Start()
 	select {}
-
 }
