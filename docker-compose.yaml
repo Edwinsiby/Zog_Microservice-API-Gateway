@@ -1,0 +1,74 @@
+version: '3'
+services:
+  zog:
+    image: zog_api_gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service1
+      - service2
+      - service3
+      - service4
+
+  service1:
+    image: zog_authsvc
+    environment:
+      - DSN=host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable
+    ports:
+      - "5050:5050"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  service2:
+    image: zog_usersvc
+    environment:
+      - DSN=host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable
+    ports:
+      - "5151:5151"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  service3:
+    image: zog_adminsvc
+    environment:
+      - DSN=host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable
+    ports:
+      - "5252:5252"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  service4:
+    image: zog_ordersvc
+    environment:
+      - DSN=host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable
+    ports:
+      - "5353:5353"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=acid
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  pgdata:
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.23.0.0/16
