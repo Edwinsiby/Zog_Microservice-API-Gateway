@@ -13,7 +13,7 @@ services:
   service1:
     image: zog_authsvc
     environment:
-      - DSN=host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable
+      - DSN="host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable"
     ports:
       - "5050:5050"
     depends_on:
@@ -23,7 +23,7 @@ services:
   service2:
     image: zog_usersvc
     environment:
-      - DSN=host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable
+      - DSN="host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable"
     ports:
       - "5151:5151"
     depends_on:
@@ -53,13 +53,15 @@ services:
   db:
     image: postgres
     environment:
+      - POSTGRES_USER=edwin
       - POSTGRES_PASSWORD=acid
+      - POSTGRES_DB=edwin
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U edwin"]
       interval: 10s
       timeout: 5s
       retries: 3
