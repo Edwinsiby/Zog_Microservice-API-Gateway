@@ -12,20 +12,20 @@ services:
 
   service1:
     image: zog_authsvc
-    environment:
-      - DSN="host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable"
     ports:
       - "5050:5050"
+    environment:
+      - DSN="host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable"
     depends_on:
       db:
         condition: service_healthy
 
   service2:
     image: zog_usersvc
+    ports:
+      - "5051:5051"
     environment:
       - DSN="host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable"
-    ports:
-      - "5151:5151"
     depends_on:
       db:
         condition: service_healthy
