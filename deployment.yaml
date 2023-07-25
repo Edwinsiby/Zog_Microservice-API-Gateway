@@ -1,0 +1,180 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zog-api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zog-api-gateway
+  template:
+    metadata:
+      labels:
+        app: zog-api-gateway
+    spec:
+      containers:
+        - name: zog-api-gateway
+          image: zog_gateway
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVICE1_URL
+              value: "service1:5050"
+            - name: SERVICE2_URL
+              value: "service2:5051"
+            - name: SERVICE3_URL
+              value: "service3:5252"
+            - name: SERVICE4_URL
+              value: "service4:5353"
+          dependsOn:
+            - name: service1
+            - name: service2
+            - name: service3
+            - name: service4
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zog-authsvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zog-authsvc
+  template:
+    metadata:
+      labels:
+        app: zog-authsvc
+    spec:
+      containers:
+        - name: zog-authsvc
+          image: zog_authsvc
+          ports:
+            - containerPort: 5050
+          env:
+            - name: DSN
+              value: "host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable"
+          dependsOn:
+            - name: db
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zog-adminsvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zog-adminsvc
+  template:
+    metadata:
+      labels:
+        app: zog-adminsvc
+    spec:
+      containers:
+        - name: zog-adminsvc
+          image: zog_adminsvc
+          ports:
+            - containerPort: 5051
+          env:
+            - name: DSN
+              value: "host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable"
+          dependsOn:
+            - name: db
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zog-usersvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zog-usersvc
+  template:
+    metadata:
+      labels:
+        app: zog-usersvc
+    spec:
+      containers:
+        - name: zog-usersvc
+          image: zog_usersvc
+          ports:
+            - containerPort: 5252
+          env:
+            - name: DSN
+              value: "host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable"
+          dependsOn:
+            - name: db
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zog-ordersvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zog-ordersvc
+  template:
+    metadata:
+      labels:
+        app: zog-ordersvc
+    spec:
+      containers:
+        - name: zog-ordersvc
+          image: zog_ordersvc
+          ports:
+            - containerPort: 5353
+          env:
+            - name: DSN
+              value: "host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable"
+          dependsOn:
+            - name: db
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zog-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zog-db
+  template:
+    metadata:
+      labels:
+        app: zog-db
+    spec:
+      containers:
+        - name: zog-db
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: edwin
+            - name: POSTGRES_PASSWORD
+              value: acid
+            - name: POSTGRES_DB
+              value: edwin
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - "-U"
+                - edwin
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            exec:
+              command:
+                - pg_isready
+                - "-U"
+                - edwin
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
