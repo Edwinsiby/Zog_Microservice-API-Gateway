@@ -1,7 +1,7 @@
 version: '3'
 services:
   zog:
-    image: zog_api_gateway
+    image: zog_gateway
     ports:
       - "8080:8080"
     depends_on:
@@ -21,7 +21,7 @@ services:
         condition: service_healthy
 
   service2:
-    image: zog_usersvc
+    image: zog_adminsvc
     ports:
       - "5051:5051"
     environment:
@@ -31,7 +31,7 @@ services:
         condition: service_healthy
 
   service3:
-    image: zog_adminsvc
+    image: zog_usersvc
     environment:
       - DSN=host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable
     ports:
@@ -56,8 +56,6 @@ services:
       - POSTGRES_USER=edwin
       - POSTGRES_PASSWORD=acid
       - POSTGRES_DB=edwin
-    volumes:
-      - pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
@@ -72,5 +70,3 @@ networks:
   default:
     ipam:
       driver: default
-      config:
-        - subnet: 172.23.0.0/16
