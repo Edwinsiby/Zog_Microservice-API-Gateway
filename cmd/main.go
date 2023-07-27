@@ -54,7 +54,7 @@ func InitializeApp() (*gin.Engine, error) {
 	routes.AuthenticationRoutes(r, authenticationHandler)
 
 	// Service2
-	adminDashboardConn, err := grpc.Dial("zlocalhost:5051", grpc.WithInsecure())
+	adminDashboardConn, err := grpc.Dial("localhost:5051", grpc.WithInsecure())
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func InitializeApp() (*gin.Engine, error) {
 	routes.UserDashboardRoutes(r, userDashboardHandler)
 
 	// Service4
-	orderConn, err := grpc.Dial("zlocalhost:5053", grpc.WithInsecure())
+	orderConn, err := grpc.Dial("localhost:5053", grpc.WithInsecure())
 	if err != nil {
 		return nil, err
 	}
