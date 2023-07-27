@@ -29,6 +29,10 @@ func TestUserSignup(t *testing.T) {
 				}
 				mockservices.EXPECT().MyMethod(context.Background(), req)
 			},
+			checkResponse: func(t *testing.T, responseRecorder *httptest.ResponseRecorder) {
+				assert.Equal(t, http.StatusOK, responseRecorder.Code)
+
+			},
 		},
 	}
 
