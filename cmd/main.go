@@ -42,7 +42,7 @@ func InitializeApp() (*gin.Engine, error) {
 
 	// Service1
 	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	authConn, err := grpc.Dial("service1:5050", grpc.WithInsecure())
+	authConn, err := grpc.Dial("localhost:5050", grpc.WithInsecure())
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ func InitializeApp() (*gin.Engine, error) {
 	routes.AuthenticationRoutes(r, authenticationHandler)
 
 	// Service2
-	adminDashboardConn, err := grpc.Dial("service2:5051", grpc.WithInsecure())
+	adminDashboardConn, err := grpc.Dial("zlocalhost:5051", grpc.WithInsecure())
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ func InitializeApp() (*gin.Engine, error) {
 	routes.AdminDashboardRoutes(r, adminDashboardHandler)
 
 	// Service3
-	userDashboardConn, err := grpc.Dial("service3:5052", grpc.WithInsecure())
+	userDashboardConn, err := grpc.Dial("localhost:5052", grpc.WithInsecure())
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func InitializeApp() (*gin.Engine, error) {
 	routes.UserDashboardRoutes(r, userDashboardHandler)
 
 	// Service4
-	orderConn, err := grpc.Dial("service4:5053", grpc.WithInsecure())
+	orderConn, err := grpc.Dial("zlocalhost:5053", grpc.WithInsecure())
 	if err != nil {
 		return nil, err
 	}

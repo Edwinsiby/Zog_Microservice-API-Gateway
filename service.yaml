@@ -44,8 +44,9 @@ spec:
     app: zog-usersvc
   ports:
     - protocol: TCP
-      port: 5252
-      targetPort: 5252
+      port: 5052
+      targetPort: 5052
+
 ---
 apiVersion: v1
 kind: Service
@@ -56,16 +57,16 @@ spec:
     app: zog-ordersvc
   ports:
     - protocol: TCP
-      port: 5353
-      targetPort: 5353
+      port: 5053
+      targetPort: 5053
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: zog-db
+  name: db
 spec:
   selector:
-    app: zog-db
+    app: db
   ports:
     - protocol: TCP
       port: 5432

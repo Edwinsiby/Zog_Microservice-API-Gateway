@@ -35,7 +35,7 @@ services:
     environment:
       - DSN=host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable
     ports:
-      - "5252:5252"
+      - "5052:5052"
     depends_on:
       db:
         condition: service_healthy
@@ -45,7 +45,7 @@ services:
     environment:
       - DSN=host=db user=edwin dbname=edwin password=acid port=5432 sslmode=disable
     ports:
-      - "5353:5353"
+      - "5053:5053"
     depends_on:
       db:
         condition: service_healthy
