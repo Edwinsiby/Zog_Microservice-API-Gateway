@@ -16,10 +16,10 @@ func AuthenticationRoutes(r *gin.Engine, handlers *handlers.AuthenticationHandle
 	r.POST("/user/loginwithotp", handlers.LoginWithOtp)
 	r.POST("/user/otpvalidation", handlers.LoginOtpValidation)
 	r.POST("/user/loginwithpassword", handlers.LoginWithPassword)
-
+	r.POST("/logout", handlers.Logout)
 	r.POST("/admin/loginpassword", handlers.AdminLoginWithPassword)
 	r.POST("/admin/otpvalidation", handlers.LoginOtpValidation)
 	adminRoutes.POST("/admin/registeradmin", handlers.RegisterAdmin)
 	adminRoutes.GET("/admin/home", handlers.AdminDashboard)
-	adminRoutes.POST("/logout", handlers.Logout)
+
 }
