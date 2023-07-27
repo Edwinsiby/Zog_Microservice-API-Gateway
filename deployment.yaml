@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name:  zog-api-gateway
-          image: edwinsiby/zog_apigateway:v1.0
+          image: edwinsiby/zog_apigateway:v2.1
           ports:
             - containerPort: 8080
           env:
